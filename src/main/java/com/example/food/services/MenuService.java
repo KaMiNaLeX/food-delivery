@@ -8,4 +8,5 @@ public interface MenuService {
     List<MenuDto> getAllMenu();
 
     MenuDto createMenu(MenuDto menuDto);
+    List getAllMenuDishes() throws NoSuchFieldException, IllegalAccessException;
 }
