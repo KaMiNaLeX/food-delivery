@@ -27,7 +27,7 @@ public class MenuController {
 
     @GetMapping("/menu/dishes")
     public List getAllMenuDishes() throws NoSuchFieldException, IllegalAccessException {
-        Pageable pageable = PageRequest.of(0, 5);
+        Pageable pageable = PageRequest.of(0, 6);
         Page<Map<String, Object>> pageDishes = menuRepository.findAllDishes(pageable);
         List<Map<String, Object>> list = pageDishes.getContent();
         List<MenuDishDto> resultList = new ArrayList<>();
