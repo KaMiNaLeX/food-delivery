@@ -11,5 +11,5 @@ public interface MenuService {
 
     //List getAllMenuDishes() throws NoSuchFieldException, IllegalAccessException;
 
-    List getAllMenuDishesParam(int page,int size) throws NoSuchFieldException, IllegalAccessException;
+    List getAllMenuDishesParam(int page, int size) throws NoSuchFieldException, IllegalAccessException;
 }
