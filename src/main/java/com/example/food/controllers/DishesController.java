@@ -1,7 +1,6 @@
 package com.example.food.controllers;
 
 import com.example.food.dto.DishesDto;
-import com.example.food.models.Dishes;
 import com.example.food.services.DishesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -22,8 +21,9 @@ public class DishesController {
     public List<DishesDto> getAllDishes() {
         return dishesService.getAllDishes();
     }
+
     @PostMapping("/dishes/create")
-    public DishesDto createDish(@RequestBody @Valid DishesDto dishesDto, BindingResult brDishesDto){
+    public DishesDto createDish(@RequestBody @Valid DishesDto dishesDto, BindingResult brDishesDto) {
         System.out.println("lexa pidor");
         return null;
     }
