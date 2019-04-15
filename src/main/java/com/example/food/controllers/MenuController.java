@@ -3,10 +3,7 @@ package com.example.food.controllers;
 import com.example.food.dto.MenuDto;
 import com.example.food.services.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,11 +13,16 @@ public class MenuController {
     private MenuService menuService;
 
 
-    @GetMapping("/menu/dishes")
-    public List getAllMenuDishes() throws NoSuchFieldException, IllegalAccessException {
-
-        return menuService.getAllMenuDishes();
+    @PostMapping("/menu/dishes")
+    public List getAllMenuDishesParam(@RequestParam("page") int page, @RequestParam("size") int size)
+            throws NoSuchFieldException, IllegalAccessException {
+        return menuService.getAllMenuDishesParam(page, size);
     }
+
+    //@GetMapping("/menu/dishes")
+    //public List getAllMenuDishes() throws NoSuchFieldException, IllegalAccessException {
+    //      return menuService.getAllMenuDishes();
+    //}
 
     @GetMapping("/menu")
     public List<MenuDto> getAllMenu() {
