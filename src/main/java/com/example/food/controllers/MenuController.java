@@ -24,6 +24,7 @@ public class MenuController {
     //      return menuService.getAllMenuDishes();
     //}
 
+
     @GetMapping("/menu")
     public List<MenuDto> getAllMenu() {
         return menuService.getAllMenu();
