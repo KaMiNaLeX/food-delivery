@@ -1,6 +1,7 @@
 package com.example.food.services.impl;
 
 import com.example.food.dto.OrdersDto;
+import com.example.food.models.Orders;
 import com.example.food.repositories.OrderRepository;
 import com.example.food.services.ModelMapperService;
 import com.example.food.services.OrdersService;
@@ -20,5 +21,13 @@ public class OrdersServiceImpl implements OrdersService, ModelMapperService {
         List<OrdersDto> ordersDtoList = new ArrayList<>();
         map(orderRepository.findAll(), ordersDtoList);
         return ordersDtoList;
+    }
+
+    @Override
+    public OrdersDto createOrders(OrdersDto ordersDto) {
+        Orders orders = new Orders();
+        map(ordersDto,orders);
+        map(orderRepository.save(orders),ordersDto);
+        return ordersDto;
     }
 }

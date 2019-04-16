@@ -5,6 +5,7 @@ import com.example.food.services.OrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -15,8 +16,8 @@ public class OrdersController {
     private OrdersService ordersService;
 
     @PostMapping("/orders/create")
-    public OrdersDto createOrder() {
-        return null;
+    public OrdersDto createOrder(@RequestBody OrdersDto ordersDto) {
+        return ordersService.createOrders(ordersDto);
     }
 
     @GetMapping("/orders")

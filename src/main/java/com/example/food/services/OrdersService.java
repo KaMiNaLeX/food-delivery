@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface OrdersService {
     List<OrdersDto> getAllOrders();
+
+    OrdersDto createOrders(OrdersDto ordersDto);
 }
