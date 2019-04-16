@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DishesServiceImpl implements DishesService, ModelMapperService {
@@ -29,5 +30,16 @@ public class DishesServiceImpl implements DishesService, ModelMapperService {
         map(dishesDto, dishes);
         map((dishRepository.save(dishes)), dishesDto);
         return dishesDto;
+    }
+
+    @Override
+    public DishesDto getDishById(Long id) {
+        Optional<Dishes> optionalDishes = dishRepository.findById(id);
+        if (optionalDishes.isPresent()) {
+            DishesDto dishesDto = new DishesDto();
+            map(optionalDishes.get(), dishesDto);
+            return dishesDto;
+        }
+        return null;
     }
 }

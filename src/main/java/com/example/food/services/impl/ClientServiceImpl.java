@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClientServiceImpl implements ModelMapperService, ClientsService {
@@ -30,5 +31,16 @@ public class ClientServiceImpl implements ModelMapperService, ClientsService {
         map(clientsDto, clients);
         map(clientRepository.save(clients), clientsDto);
         return clientsDto;
+    }
+
+    @Override
+    public ClientsDto getClientsById(Long id) {
+        Optional<Clients> optionalClients = clientRepository.findById(id);
+        if (optionalClients.isPresent()) {
+            ClientsDto clientsDto = new ClientsDto();
+            map(optionalClients.get(),clientsDto);
+            return clientsDto;
+        }
+        return null;
     }
 }

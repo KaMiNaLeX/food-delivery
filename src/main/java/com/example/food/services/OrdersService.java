@@ -8,4 +8,6 @@ public interface OrdersService {
     List<OrdersDto> getAllOrders();
 
     OrdersDto createOrders(OrdersDto ordersDto);
+
+    OrdersDto getOrderById(Long id);
 }

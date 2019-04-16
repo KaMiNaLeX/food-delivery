@@ -10,4 +10,6 @@ public interface ClientsService {
     List<ClientsDto> getAllClients();
 
     ClientsDto createClients(ClientsDto clientsDto);
+
+    ClientsDto getClientsById(Long id);
 }

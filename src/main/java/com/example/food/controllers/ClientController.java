@@ -4,10 +4,7 @@ import com.example.food.dto.ClientsDto;
 import com.example.food.models.Clients;
 import com.example.food.services.impl.ClientServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -25,5 +22,10 @@ public class ClientController {
     @PostMapping("/clients/create")
     public ClientsDto createClients(@RequestBody @Valid ClientsDto clientsDto) {
         return clientService.createClients(clientsDto);
+    }
+
+    @PostMapping("/clientsById")
+    public ClientsDto getClientsById(@RequestParam ("id") Long id){
+        return  clientService.getClientsById(id);
     }
 }

@@ -8,4 +8,6 @@ public interface DishesService {
     List<DishesDto> getAllDishes();
 
     DishesDto createDish(DishesDto dishesDto);
+
+    DishesDto getDishById(Long id);
 }

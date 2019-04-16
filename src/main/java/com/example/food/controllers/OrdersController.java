@@ -3,10 +3,7 @@ package com.example.food.controllers;
 import com.example.food.dto.OrdersDto;
 import com.example.food.services.OrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,5 +20,10 @@ public class OrdersController {
     @GetMapping("/orders")
     public List<OrdersDto> getAllOrders() {
         return ordersService.getAllOrders();
+    }
+
+    @PostMapping("/ordersById")
+    public OrdersDto getOrderById(@RequestParam("id") Long id){
+        return ordersService.getOrderById(id);
     }
 }

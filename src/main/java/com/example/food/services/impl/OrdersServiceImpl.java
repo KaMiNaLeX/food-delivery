@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrdersServiceImpl implements OrdersService, ModelMapperService {
@@ -26,8 +27,19 @@ public class OrdersServiceImpl implements OrdersService, ModelMapperService {
     @Override
     public OrdersDto createOrders(OrdersDto ordersDto) {
         Orders orders = new Orders();
-        map(ordersDto,orders);
-        map(orderRepository.save(orders),ordersDto);
+        map(ordersDto, orders);
+        map(orderRepository.save(orders), ordersDto);
         return ordersDto;
+    }
+
+    @Override
+    public OrdersDto getOrderById(Long id) {
+        Optional<Orders> optionalOrders = orderRepository.findById(id);
+        if (optionalOrders.isPresent()) {
+            OrdersDto ordersDto = new OrdersDto();
+            map(optionalOrders.get(), ordersDto);
+            return ordersDto;
+        }
+        return null;
     }
 }
