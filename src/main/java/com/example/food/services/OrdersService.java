@@ -10,4 +10,6 @@ public interface OrdersService {
     OrdersDto createOrders(OrdersDto ordersDto);
 
     OrdersDto getOrderById(Long id);
+
+    List getAllOrdersParam(int page, int size) throws NoSuchFieldException, IllegalAccessException;
 }
