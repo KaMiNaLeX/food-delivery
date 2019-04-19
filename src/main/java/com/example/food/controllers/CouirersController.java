@@ -4,24 +4,22 @@ import com.example.food.dto.CouirersDto;
 import com.example.food.models.Couirers;
 import com.example.food.services.CouirersService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("couirers")
 public class CouirersController {
     @Autowired
     private CouirersService couirersService;
 
-    @GetMapping("/couirers")
+    @GetMapping("/")
     public List<CouirersDto> getAllCouirers() {
         return couirersService.getAllCouirers();
     }
 
-    @PostMapping("/couirers/create")
+    @PostMapping("/create")
     public CouirersDto createCouirers(@RequestBody CouirersDto couirersDto) {
         return couirersService.createCouirers(couirersDto);
     }

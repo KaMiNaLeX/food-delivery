@@ -5,16 +5,18 @@ import com.example.food.models.ClientsDishes;
 import com.example.food.services.ClientsDishesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("clients/dishes")
 public class ClientsDishesController {
     @Autowired
     private ClientsDishesService clientsDishesService;
 
-    @GetMapping("/clientsDishes")
+    @GetMapping("/")
     public List<ClientsDishesDto> getAllClientsDishes() {
         return clientsDishesService.getAllClientsDishes();
     }

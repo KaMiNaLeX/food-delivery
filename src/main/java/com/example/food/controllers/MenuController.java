@@ -8,12 +8,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("menu")
 public class MenuController {
     @Autowired
     private MenuService menuService;
 
 
-    @PostMapping("/menu/dishes")
+    @GetMapping("/dishes")
     public List getAllMenuDishesParam(@RequestParam("page") int page, @RequestParam("size") int size)
             throws NoSuchFieldException, IllegalAccessException {
         return menuService.getAllMenuDishesParam(page, size);
@@ -25,12 +26,12 @@ public class MenuController {
     //}
 
 
-    @GetMapping("/menu")
+    @GetMapping("/")
     public List<MenuDto> getAllMenu() {
         return menuService.getAllMenu();
     }
 
-    @PostMapping("/menu/create")
+    @PostMapping("/create")
     public MenuDto createMenu(@RequestBody MenuDto menuDto) {
         return menuService.createMenu(menuDto);
     }

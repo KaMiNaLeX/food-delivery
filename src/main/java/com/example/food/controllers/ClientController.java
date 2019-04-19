@@ -10,22 +10,23 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequestMapping("clients")
 public class ClientController {
     @Autowired
     private ClientServiceImpl clientService;
 
-    @GetMapping("/clients")
+    @GetMapping("/")
     public List<ClientsDto> getAllClients() {
         return clientService.getAllClients();
     }
 
-    @PostMapping("/clients/create")
+    @PostMapping("/create")
     public ClientsDto createClients(@RequestBody @Valid ClientsDto clientsDto) {
         return clientService.createClients(clientsDto);
     }
 
-    @PostMapping("/clientsById")
-    public ClientsDto getClientsById(@RequestParam ("id") Long id){
+    @GetMapping("/{id}")
+    public ClientsDto getClientsById(@PathVariable ("id") Long id){
         return  clientService.getClientsById(id);
     }
 }
