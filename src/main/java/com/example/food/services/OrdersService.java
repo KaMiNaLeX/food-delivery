@@ -1,5 +1,6 @@
 package com.example.food.services;
 
+import com.example.food.dto.OrderMenuDto;
 import com.example.food.dto.OrdersDto;
 
 import java.util.List;
@@ -11,5 +12,5 @@ public interface OrdersService {
 
     OrdersDto getOrderById(Long id);
 
-    List getAllOrdersParam(int page, int size) throws NoSuchFieldException, IllegalAccessException;
+    List getAllOrdersParam(String login);
 }

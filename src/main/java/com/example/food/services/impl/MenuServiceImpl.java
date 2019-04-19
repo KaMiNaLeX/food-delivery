@@ -37,26 +37,6 @@ public class MenuServiceImpl implements MenuService, ModelMapperService {
         return menuDto;
     }
 
-   /* @Override
-    public List getAllMenuDishes() throws NoSuchFieldException, IllegalAccessException{
-        Pageable pageable = PageRequest.of(0, 6);
-        Page<Map<String, Object>> pageDishes = menuRepository.findAllDishes(pageable);
-        List<Map<String, Object>> list = pageDishes.getContent();
-        List<MenuDishDto> resultList = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            Map<String, Object> map = list.get(i);
-            MenuDishDto menuDishDto = new MenuDishDto();
-            for (Map.Entry<String, Object> entry : map.entrySet()) {
-                Field field = MenuDishDto.class.getDeclaredField(entry.getKey());
-                field.setAccessible(true);
-                field.set(menuDishDto, entry.getValue());
-            }
-            resultList.add(menuDishDto);
-
-        }
-        return resultList;
-    }
-    */
 
     @Override
     public List getAllMenuDishesParam(int page, int size) throws NoSuchFieldException, IllegalAccessException {

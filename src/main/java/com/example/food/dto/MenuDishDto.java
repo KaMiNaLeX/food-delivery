@@ -4,6 +4,8 @@ import java.math.BigInteger;
 
 public class MenuDishDto {
     private String name;
+    private String description;
+    private BigInteger mass;
     private String category;
     private BigInteger cost;
 
@@ -29,5 +31,21 @@ public class MenuDishDto {
 
     public void setCost(BigInteger cost) {
         this.cost = cost;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public BigInteger getMass() {
+        return mass;
+    }
+
+    public void setMass(BigInteger mass) {
+        this.mass = mass;
     }
 }
