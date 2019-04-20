@@ -1,17 +1,18 @@
 package com.example.food.dto;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 
 public class CouirersDto implements Serializable {
-    private Long id;
+    private BigInteger id;
     private String surname;
     private String phone;
 
-    public Long getId() {
+    public BigInteger getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(BigInteger id) {
         this.id = id;
     }
 

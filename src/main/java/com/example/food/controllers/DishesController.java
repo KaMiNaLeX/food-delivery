@@ -14,16 +14,18 @@ public class DishesController {
     private DishesService dishesService;
 
     @GetMapping("/")
-    public List<DishesDto> getAllDishes() {
-        return dishesService.getAllDishes();
+    public List getAllDishes(@RequestParam("page") int page, @RequestParam("size") int size)
+            throws NoSuchFieldException, IllegalAccessException {
+        return dishesService.getAllDishes(page, size);
     }
 
     @PostMapping("/create")
     public DishesDto createDish(@RequestBody DishesDto dishesDto) {
         return dishesService.createDish(dishesDto);
     }
-    @GetMapping("/{id]")
-    public DishesDto getDishesById(@PathVariable("id") Long id){
+
+    @GetMapping("/{id}")
+    public DishesDto getDishesById(@PathVariable("id") Long id) {
         return dishesService.getDishById(id);
     }
 }

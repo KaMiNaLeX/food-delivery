@@ -1,17 +1,19 @@
 package com.example.food.dto;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 
 public class MenuDto implements Serializable {
-    private Long id;
+    private BigInteger id;
     private String category;
-    private Long cost;
+    private BigInteger cost;
+    private BigInteger dishId;
 
-    public Long getId() {
+    public BigInteger getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(BigInteger id) {
         this.id = id;
     }
 
@@ -23,11 +25,19 @@ public class MenuDto implements Serializable {
         this.category = category;
     }
 
-    public Long getCost() {
+    public BigInteger getCost() {
         return cost;
     }
 
-    public void setCost(Long cost) {
+    public void setCost(BigInteger cost) {
         this.cost = cost;
+    }
+
+    public BigInteger getDishId() {
+        return dishId;
+    }
+
+    public void setDishId(BigInteger dishId) {
+        this.dishId = dishId;
     }
 }

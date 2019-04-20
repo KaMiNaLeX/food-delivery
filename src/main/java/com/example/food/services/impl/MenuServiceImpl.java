@@ -41,7 +41,7 @@ public class MenuServiceImpl implements MenuService, ModelMapperService {
     @Override
     public List getAllMenuDishesParam(int page, int size) throws NoSuchFieldException, IllegalAccessException {
         Pageable pageable = PageRequest.of(page, size);
-        Page<Map<String, Object>> pageDishes = menuRepository.findAllDishes(pageable);
+        Page<Map<String, Object>> pageDishes = menuRepository.findAllMenuDishes(pageable);
         List<Map<String, Object>> list = pageDishes.getContent();
         List<MenuDishDto> resultList = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {

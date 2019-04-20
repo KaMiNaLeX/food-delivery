@@ -19,8 +19,9 @@ public class OrdersController {
     }
 
     @GetMapping("/")
-    public List<OrdersDto> getAllOrders() {
-        return ordersService.getAllOrders();
+    public List getAllOrders(@RequestParam("page") int page, @RequestParam("size") int size)
+            throws NoSuchFieldException, IllegalAccessException {
+        return ordersService.getAllOrders(page, size);
     }
 
     @GetMapping("/{id}")

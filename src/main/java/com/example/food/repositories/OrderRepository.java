@@ -1,6 +1,8 @@
 package com.example.food.repositories;
 
 import com.example.food.models.Orders;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,4 +18,7 @@ public interface OrderRepository extends JpaRepository<Orders, Long> {
             "INNER JOIN ORDERS O ON O.CLIENT_ID = C.ID WHERE C.LOGIN=:LOGIN", nativeQuery = true)
     List<Map<String, Object>> getByLogin(@Param("LOGIN") String login);
 
+    @Query(value = "SELECT * FROM ORDERS ",
+            countQuery = "SELECT COUNT(*) FROM ORDERS ", nativeQuery = true)
+    Page<Map<String, Object>> findAllOrders(Pageable pageable);
 }

@@ -1,53 +1,56 @@
 package com.example.food.dto;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.sql.Timestamp;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class OrdersDto implements Serializable {
-    private Long id;
-    private List<ClientsDto> clientId;
-    private List<CouirersDto> couirerId;
-    private Long sum;
-    private Timestamp timeOrder;
+    private BigInteger id;
+    private BigInteger clientId;
+    private BigInteger couirerId;
+    private BigInteger sum;
+    //private Timestamp timeOrder;
 
-    public Long getId() {
+
+    public BigInteger getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(BigInteger id) {
         this.id = id;
     }
 
-    public List<ClientsDto> getClientId() {
+    public BigInteger getClientId() {
         return clientId;
     }
 
-    public void setClientId(List<ClientsDto> clientId) {
+    public void setClientId(BigInteger clientId) {
         this.clientId = clientId;
     }
 
-    public List<CouirersDto> getCouirerId() {
+    public BigInteger getCouirerId() {
         return couirerId;
     }
 
-    public void setCouirerId(List<CouirersDto> couirerId) {
+    public void setCouirerId(BigInteger couirerId) {
         this.couirerId = couirerId;
     }
 
-    public Long getSum() {
+    public BigInteger getSum() {
         return sum;
     }
 
-    public void setSum(Long sum) {
+    public void setSum(BigInteger sum) {
         this.sum = sum;
     }
 
-    public Timestamp getTimeOrder() {
+   /* public Timestamp getTimeOrder() {
         return timeOrder;
     }
 
     public void setTimeOrder(Timestamp timeOrder) {
         this.timeOrder = timeOrder;
-    }
+    }*/
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 @Service
 public interface ClientsService {
-    List<ClientsDto> getAllClients();
+    List getAllClients(int page, int size) throws NoSuchFieldException, IllegalAccessException;
 
     ClientsDto createClients(ClientsDto clientsDto);
 
