@@ -1,6 +1,5 @@
 package com.example.food.services.impl;
 
-import com.example.food.dto.DishesDto;
 import com.example.food.dto.OrderMenuDto;
 import com.example.food.dto.OrdersDto;
 import com.example.food.models.Orders;
@@ -13,7 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -25,21 +24,19 @@ public class OrdersServiceImpl implements OrdersService, ModelMapperService {
     private OrderRepository orderRepository;
 
     @Override
-    public List getAllOrders(int page, int size) throws NoSuchFieldException, IllegalAccessException {
+    public List getAllOrders(int page, int size) throws IllegalAccessException {
         Pageable pageable = PageRequest.of(page, size);
         Page<Map<String, Object>> pageOrders = orderRepository.findAllOrders(pageable);
         List<Map<String, Object>> list = pageOrders.getContent();
         List<OrdersDto> resultList = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            Map<String, Object> map = list.get(i);
-            OrdersDto ordersDto = new OrdersDto();
-            for (Map.Entry<String, Object> entry : map.entrySet()) {
-                Field field = OrdersDto.class.getDeclaredField(entry.getKey());
-                field.setAccessible(true);
-                field.set(ordersDto, entry.getValue());
-            }
-            resultList.add(ordersDto);
-
+        try {
+            mapListMapToDto(list, resultList, OrdersDto.class);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
         }
         return resultList;
     }

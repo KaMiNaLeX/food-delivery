@@ -3,16 +3,21 @@ package com.example.food.dto;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.sql.Timestamp;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 public class OrdersDto implements Serializable {
     private BigInteger id;
     private BigInteger clientId;
     private BigInteger couirerId;
     private BigInteger sum;
-    //private Timestamp timeOrder;
+    private Timestamp timeOrder;
 
+    public Timestamp getTimeOrder() {
+        return timeOrder;
+    }
+
+    public void setTimeOrder(Timestamp timeOrder) {
+        this.timeOrder = timeOrder;
+    }
 
     public BigInteger getId() {
         return id;
@@ -38,6 +43,7 @@ public class OrdersDto implements Serializable {
         this.couirerId = couirerId;
     }
 
+
     public BigInteger getSum() {
         return sum;
     }
@@ -46,11 +52,4 @@ public class OrdersDto implements Serializable {
         this.sum = sum;
     }
 
-   /* public Timestamp getTimeOrder() {
-        return timeOrder;
-    }
-
-    public void setTimeOrder(Timestamp timeOrder) {
-        this.timeOrder = timeOrder;
-    }*/
 }
