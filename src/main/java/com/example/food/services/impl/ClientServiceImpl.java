@@ -6,6 +6,8 @@ import com.example.food.models.Clients;
 import com.example.food.repositories.ClientRepository;
 import com.example.food.services.ClientsService;
 import com.example.food.services.ModelMapperService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,11 +22,12 @@ import java.util.Optional;
 
 @Service
 public class ClientServiceImpl implements ModelMapperService, ClientsService {
+    private final Logger LOGGER = LoggerFactory.getLogger(ClientServiceImpl.class);
     @Autowired
     private ClientRepository clientRepository;
 
     @Override
-    public List getAllClients(int page, int size) throws NoSuchFieldException, IllegalAccessException {
+    public List getAllClients(int page, int size) throws IllegalAccessException {
         Pageable pageable = PageRequest.of(page, size);
         Page<Map<String, Object>> pageClients = clientRepository.findAllClients(pageable);
         List<Map<String, Object>> list = pageClients.getContent();
@@ -33,7 +36,12 @@ public class ClientServiceImpl implements ModelMapperService, ClientsService {
             Map<String, Object> map = list.get(i);
             ClientsDto clientsDto = new ClientsDto();
             for (Map.Entry<String, Object> entry : map.entrySet()) {
-                Field field = ClientsDto.class.getDeclaredField(entry.getKey());
+                Field field = null;
+                try {
+                    field = ClientsDto.class.getDeclaredField(entry.getKey());
+                } catch (NoSuchFieldException e) {
+                    LOGGER.error("getAllClients:NoSuchFieldException");
+                }
                 field.setAccessible(true);
                 field.set(clientsDto, entry.getValue());
             }
@@ -49,6 +57,7 @@ public class ClientServiceImpl implements ModelMapperService, ClientsService {
         Clients clients = new Clients();
         map(clientsDto, clients);
         map(clientRepository.save(clients), clientsDto);
+        LOGGER.info("Client create");
         return clientsDto;
     }
 

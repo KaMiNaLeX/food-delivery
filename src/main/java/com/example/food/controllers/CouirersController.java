@@ -15,7 +15,7 @@ public class CouirersController {
 
     @GetMapping("/")
     public List getAllCouirers(@RequestParam("page") int page, @RequestParam("size") int size)
-            throws NoSuchFieldException, IllegalAccessException {
+            throws IllegalAccessException {
         return couirersService.getAllCouirers(page, size);
     }
 

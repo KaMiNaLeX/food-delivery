@@ -6,6 +6,8 @@ import com.example.food.models.Orders;
 import com.example.food.repositories.OrderRepository;
 import com.example.food.services.ModelMapperService;
 import com.example.food.services.OrdersService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,6 +22,7 @@ import java.util.Optional;
 
 @Service
 public class OrdersServiceImpl implements OrdersService, ModelMapperService {
+    private final Logger LOGGER = LoggerFactory.getLogger(OrdersServiceImpl.class);
     @Autowired
     private OrderRepository orderRepository;
 
@@ -32,11 +35,11 @@ public class OrdersServiceImpl implements OrdersService, ModelMapperService {
         try  {
             mapListMapToDto(list, resultList, OrdersDto.class);
         } catch (NoSuchMethodException e) {
-            e.printStackTrace();
+            LOGGER.error("getAllOrders:NoSuchMethodException");
         } catch (InvocationTargetException e) {
-            e.printStackTrace();
+            LOGGER.error("getAllOrders:InvocationTargetException");
         } catch (InstantiationException e) {
-            e.printStackTrace();
+            LOGGER.error("getAllOrders:InstantiationException");
         }
         return resultList;
     }
@@ -46,6 +49,7 @@ public class OrdersServiceImpl implements OrdersService, ModelMapperService {
         Orders orders = new Orders();
         map(ordersDto, orders);
         map(orderRepository.save(orders), ordersDto);
+        LOGGER.info("Order create");
         return ordersDto;
     }
 

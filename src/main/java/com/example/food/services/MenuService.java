@@ -9,5 +9,5 @@ public interface MenuService {
 
     MenuDto createMenu(MenuDto menuDto);
 
-    List getAllMenuDishesParam(int page, int size) throws NoSuchFieldException, IllegalAccessException;
+    List getAllMenuDishesParam(int page, int size) throws IllegalAccessException;
 }

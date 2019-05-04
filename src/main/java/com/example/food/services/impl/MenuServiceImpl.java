@@ -6,6 +6,8 @@ import com.example.food.models.Menu;
 import com.example.food.repositories.MenuRepository;
 import com.example.food.services.MenuService;
 import com.example.food.services.ModelMapperService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,6 +21,7 @@ import java.util.Map;
 
 @Service
 public class MenuServiceImpl implements MenuService, ModelMapperService {
+    private final Logger LOGGER = LoggerFactory.getLogger(MenuServiceImpl.class);
     @Autowired
     private MenuRepository menuRepository;
 
@@ -34,12 +37,13 @@ public class MenuServiceImpl implements MenuService, ModelMapperService {
         Menu menu = new Menu();
         map(menuDto, menu);
         map(menuRepository.save(menu), menuDto);
+        LOGGER.info("Menu create");
         return menuDto;
     }
 
 
     @Override
-    public List getAllMenuDishesParam(int page, int size) throws NoSuchFieldException, IllegalAccessException {
+    public List getAllMenuDishesParam(int page, int size) throws IllegalAccessException {
         Pageable pageable = PageRequest.of(page, size);
         Page<Map<String, Object>> pageDishes = menuRepository.findAllMenuDishes(pageable);
         List<Map<String, Object>> list = pageDishes.getContent();
@@ -48,7 +52,12 @@ public class MenuServiceImpl implements MenuService, ModelMapperService {
             Map<String, Object> map = list.get(i);
             MenuDishDto menuDishDto = new MenuDishDto();
             for (Map.Entry<String, Object> entry : map.entrySet()) {
-                Field field = MenuDishDto.class.getDeclaredField(entry.getKey());
+                Field field = null;
+                try {
+                    field = MenuDishDto.class.getDeclaredField(entry.getKey());
+                } catch (NoSuchFieldException e) {
+                    LOGGER.error("getAllMenuDishesParam:NoSuchFieldException");
+                }
                 field.setAccessible(true);
                 field.set(menuDishDto, entry.getValue());
             }

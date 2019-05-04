@@ -16,7 +16,7 @@ public class ClientController {
 
     @GetMapping("/")
     public List getAllClients(@RequestParam("page") int page, @RequestParam("size") int size)
-            throws NoSuchFieldException, IllegalAccessException {
+            throws IllegalAccessException {
         return clientService.getAllClients(page, size);
     }
 

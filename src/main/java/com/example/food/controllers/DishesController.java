@@ -15,7 +15,7 @@ public class DishesController {
 
     @GetMapping("/")
     public List getAllDishes(@RequestParam("page") int page, @RequestParam("size") int size)
-            throws NoSuchFieldException, IllegalAccessException {
+            throws IllegalAccessException {
         return dishesService.getAllDishes(page, size);
     }
 

@@ -16,14 +16,9 @@ public class MenuController {
 
     @GetMapping("/dishes")
     public List getAllMenuDishesParam(@RequestParam("page") int page, @RequestParam("size") int size)
-            throws NoSuchFieldException, IllegalAccessException {
+            throws IllegalAccessException {
         return menuService.getAllMenuDishesParam(page, size);
     }
-
-    //@GetMapping("/menu/dishes")
-    //public List getAllMenuDishes() throws NoSuchFieldException, IllegalAccessException {
-    //      return menuService.getAllMenuDishes();
-    //}
 
 
     @GetMapping("/")
