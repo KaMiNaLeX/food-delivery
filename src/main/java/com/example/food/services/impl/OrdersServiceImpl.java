@@ -29,7 +29,7 @@ public class OrdersServiceImpl implements OrdersService, ModelMapperService {
         Page<Map<String, Object>> pageOrders = orderRepository.findAllOrders(pageable);
         List<Map<String, Object>> list = pageOrders.getContent();
         List<OrdersDto> resultList = new ArrayList<>();
-        try {
+        try  {
             mapListMapToDto(list, resultList, OrdersDto.class);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
