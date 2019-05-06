@@ -71,4 +71,11 @@ public class ClientServiceImpl implements ModelMapperService, ClientsService {
         }
         return null;
     }
+
+    @Override
+    public List getClientByLogin(String login) {
+        List<ClientsDto> clientsDtoList = new ArrayList<>();
+        map(clientRepository.getByLogin(login), clientsDtoList);
+        return clientsDtoList;
+    }
 }

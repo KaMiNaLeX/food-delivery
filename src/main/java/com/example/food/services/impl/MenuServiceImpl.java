@@ -66,4 +66,11 @@ public class MenuServiceImpl implements MenuService, ModelMapperService {
         }
         return resultList;
     }
+
+    @Override
+    public List getAllMenuDishesByCategory(String category) {
+        List<MenuDishDto> menuDishDtoList = new ArrayList<>();
+        map(menuRepository.getByCategory(category), menuDishDtoList);
+        return menuDishDtoList;
+    }
 }

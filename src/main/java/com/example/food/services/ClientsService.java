@@ -12,4 +12,6 @@ public interface ClientsService {
     ClientsDto createClients(ClientsDto clientsDto);
 
     ClientsDto getClientsById(Long id);
+
+    List getClientByLogin(String login);
 }
