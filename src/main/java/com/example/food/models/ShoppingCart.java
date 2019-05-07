@@ -6,17 +6,18 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "clients_dishes", schema = "food_delivery", catalog = "")
-public class ClientsDishes {
+@Table(name = "shopping_cart", schema = "food_delivery", catalog = "")
+public class ShoppingCart {
     private Long id;
     private Long menuId;
     private Long clientId;
-    private Long orderId;
+    private Long count;
+    private Long sum;
     private Menu menuByMenuId;
     private Clients clientsByClientId;
-    private Orders ordersByOrderId;
 
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
@@ -47,28 +48,40 @@ public class ClientsDishes {
     }
 
     @Basic
-    @Column(name = "order_id")
-    public Long getOrderId() {
-        return orderId;
+    @Column(name = "count")
+    public Long getCount() {
+        return count;
     }
 
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
+    public void setCount(Long count) {
+        this.count = count;
+    }
+
+    @Basic
+    @Column(name = "sum")
+    public Long getSum() {
+        return sum;
+    }
+
+    public void setSum(Long sum) {
+        this.sum = sum;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ClientsDishes that = (ClientsDishes) o;
-        return Objects.equals(menuId, that.menuId) &&
+        ShoppingCart that = (ShoppingCart) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(menuId, that.menuId) &&
                 Objects.equals(clientId, that.clientId) &&
-                Objects.equals(orderId, that.orderId);
+                Objects.equals(count, that.count) &&
+                Objects.equals(sum, that.sum);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(menuId, clientId, orderId);
+        return Objects.hash(id, menuId, clientId, count, sum);
     }
 
     @ManyToOne
@@ -93,17 +106,5 @@ public class ClientsDishes {
     @JsonIgnore
     public void setClientsByClientId(Clients clientsByClientId) {
         this.clientsByClientId = clientsByClientId;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "order_id", referencedColumnName = "id", insertable = false, updatable = false)
-    @JsonIgnore
-    public Orders getOrdersByOrderId() {
-        return ordersByOrderId;
-    }
-
-    @JsonIgnore
-    public void setOrdersByOrderId(Orders ordersByOrderId) {
-        this.ordersByOrderId = ordersByOrderId;
     }
 }

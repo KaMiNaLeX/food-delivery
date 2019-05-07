@@ -30,4 +30,9 @@ public class MenuController {
     public MenuDto createMenu(@RequestBody MenuDto menuDto) {
         return menuService.createMenu(menuDto);
     }
+
+    @GetMapping("/category/{category}")
+    public List getAllMenuDishByCategory(@PathVariable("category") String category) {
+        return menuService.getAllMenuDishesByCategory(category);
+    }
 }

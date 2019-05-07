@@ -3,12 +3,11 @@ package com.example.food.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-public class Dishes implements Serializable {
+public class Dishes {
     private Long id;
     private String description;
     private Long mass;

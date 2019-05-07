@@ -3,16 +3,18 @@ package com.example.food.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-public class Menu implements Serializable {
+public class Menu {
     private Long id;
     private String category;
     private Long cost;
     private Long dishId;
+    private Collection<ClientsDishes> clientsDishesById;
     private Dishes dishesByDishId;
+    private Collection<ShoppingCart> shoppingCartsById;
 
     @Id
     @Column(name = "id")
@@ -46,7 +48,7 @@ public class Menu implements Serializable {
     }
 
     @Basic
-    @Column(name = "dish_id", insertable = false, updatable = false)
+    @Column(name = "dish_id")
     public Long getDishId() {
         return dishId;
     }
@@ -71,8 +73,19 @@ public class Menu implements Serializable {
         return Objects.hash(id, category, cost, dishId);
     }
 
+    @OneToMany(mappedBy = "menuByMenuId")
+    @JsonIgnore
+    public Collection<ClientsDishes> getClientsDishesById() {
+        return clientsDishesById;
+    }
+
+    @JsonIgnore
+    public void setClientsDishesById(Collection<ClientsDishes> clientsDishesById) {
+        this.clientsDishesById = clientsDishesById;
+    }
+
     @ManyToOne
-    @JoinColumn(name = "dish_id", referencedColumnName = "id")
+    @JoinColumn(name = "dish_id", referencedColumnName = "id", insertable = false, updatable = false)
     @JsonIgnore
     public Dishes getDishesByDishId() {
         return dishesByDishId;
@@ -81,5 +94,16 @@ public class Menu implements Serializable {
     @JsonIgnore
     public void setDishesByDishId(Dishes dishesByDishId) {
         this.dishesByDishId = dishesByDishId;
+    }
+
+    @OneToMany(mappedBy = "menuByMenuId")
+    @JsonIgnore
+    public Collection<ShoppingCart> getShoppingCartsById() {
+        return shoppingCartsById;
+    }
+
+    @JsonIgnore
+    public void setShoppingCartsById(Collection<ShoppingCart> shoppingCartsById) {
+        this.shoppingCartsById = shoppingCartsById;
     }
 }

@@ -1,7 +1,6 @@
 package com.example.food.services.impl;
 
 import com.example.food.dto.ClientsDto;
-import com.example.food.dto.CouirersDto;
 import com.example.food.models.Clients;
 import com.example.food.repositories.ClientRepository;
 import com.example.food.services.ClientsService;
@@ -70,5 +69,12 @@ public class ClientServiceImpl implements ModelMapperService, ClientsService {
             return clientsDto;
         }
         return null;
+    }
+
+    @Override
+    public List getClientByLogin(String login) {
+        List<ClientsDto> clientsDtoList = new ArrayList<>();
+        map(clientRepository.getByLogin(login), clientsDtoList);
+        return clientsDtoList;
     }
 }

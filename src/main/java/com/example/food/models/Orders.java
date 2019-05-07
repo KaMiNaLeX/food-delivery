@@ -3,13 +3,12 @@ package com.example.food.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-public class Orders implements Serializable {
+public class Orders {
     private Long id;
     private Long clientId;
     private Long couirerId;
@@ -31,7 +30,7 @@ public class Orders implements Serializable {
     }
 
     @Basic
-    @Column(name = "client_id", insertable = false, updatable = false)
+    @Column(name = "client_id")
     public Long getClientId() {
         return clientId;
     }
@@ -41,7 +40,7 @@ public class Orders implements Serializable {
     }
 
     @Basic
-    @Column(name = "couirer_id", insertable = false, updatable = false)
+    @Column(name = "couirer_id")
     public Long getCouirerId() {
         return couirerId;
     }
@@ -99,7 +98,7 @@ public class Orders implements Serializable {
     }
 
     @ManyToOne
-    @JoinColumn(name = "client_id", referencedColumnName = "id")
+    @JoinColumn(name = "client_id", referencedColumnName = "id", insertable = false, updatable = false)
     @JsonIgnore
     public Clients getClientsByClientId() {
         return clientsByClientId;
@@ -111,7 +110,7 @@ public class Orders implements Serializable {
     }
 
     @ManyToOne
-    @JoinColumn(name = "couirer_id", referencedColumnName = "id")
+    @JoinColumn(name = "couirer_id", referencedColumnName = "id", insertable = false, updatable = false)
     @JsonIgnore
     public Couirers getCouirersByCouirerId() {
         return couirersByCouirerId;

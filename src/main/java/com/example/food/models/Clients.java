@@ -3,12 +3,11 @@ package com.example.food.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-public class Clients implements Serializable {
+public class Clients {
     private Long id;
     private String surname;
     private String phone;
@@ -17,6 +16,7 @@ public class Clients implements Serializable {
     private String password;
     private Collection<ClientsDishes> clientsDishesById;
     private Collection<Orders> ordersById;
+    private Collection<ShoppingCart> shoppingCartsById;
 
     @Id
     @Column(name = "id")
@@ -108,8 +108,8 @@ public class Clients implements Serializable {
         this.clientsDishesById = clientsDishesById;
     }
 
-    @JsonIgnore
     @OneToMany(mappedBy = "clientsByClientId")
+    @JsonIgnore
     public Collection<Orders> getOrdersById() {
         return ordersById;
     }
@@ -117,5 +117,16 @@ public class Clients implements Serializable {
     @JsonIgnore
     public void setOrdersById(Collection<Orders> ordersById) {
         this.ordersById = ordersById;
+    }
+
+    @OneToMany(mappedBy = "clientsByClientId")
+    @JsonIgnore
+    public Collection<ShoppingCart> getShoppingCartsById() {
+        return shoppingCartsById;
+    }
+
+    @JsonIgnore
+    public void setShoppingCartsById(Collection<ShoppingCart> shoppingCartsById) {
+        this.shoppingCartsById = shoppingCartsById;
     }
 }

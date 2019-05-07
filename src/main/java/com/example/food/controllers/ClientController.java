@@ -29,4 +29,9 @@ public class ClientController {
     public ClientsDto getClientsById(@PathVariable("id") Long id) {
         return clientService.getClientsById(id);
     }
+
+    @GetMapping("/login/{login}")
+    public List getClientByLogin(@PathVariable("login") String login) {
+        return clientService.getClientByLogin(login);
+    }
 }

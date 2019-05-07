@@ -4,16 +4,16 @@ import java.io.Serializable;
 import java.util.List;
 
 public class ClientsDishesDto implements Serializable {
-    private List<DishesDto> dishId;
+    private List<MenuDto> menuId;
     private List<ClientsDto> clientId;
     private List<OrdersDto> orderId;
 
-    public List<DishesDto> getDishId() {
-        return dishId;
+    public List<MenuDto> getMenuId() {
+        return menuId;
     }
 
-    public void setDishId(List<DishesDto> dishId) {
-        this.dishId = dishId;
+    public void setMenuId(List<MenuDto> menuId) {
+        this.menuId = menuId;
     }
 
     public List<ClientsDto> getClientId() {
