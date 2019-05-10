@@ -1,7 +1,7 @@
 package com.example.food.services.impl;
 
-import com.example.food.dto.ShoppingCartDishDto;
-import com.example.food.dto.ShoppingCartDto;
+import com.example.food.dto.adminDto.ShoppingCartDto;
+import com.example.food.dto.clientDto.ShoppingCartDishDto;
 import com.example.food.models.ShoppingCart;
 import com.example.food.repositories.ShoppingCartRepository;
 import com.example.food.services.ModelMapperService;

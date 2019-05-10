@@ -1,6 +1,6 @@
 package com.example.food.services;
 
-import com.example.food.dto.OrdersDto;
+import com.example.food.dto.adminDto.OrdersDto;
 
 import java.util.List;
 

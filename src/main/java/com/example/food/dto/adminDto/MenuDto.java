@@ -1,4 +1,4 @@
-package com.example.food.dto;
+package com.example.food.dto.adminDto;
 
 import java.io.Serializable;
 import java.math.BigInteger;
@@ -7,7 +7,6 @@ public class MenuDto implements Serializable {
     private BigInteger id;
     private String category;
     private BigInteger cost;
-    private BigInteger dishId;
 
     public BigInteger getId() {
         return id;
@@ -33,11 +32,4 @@ public class MenuDto implements Serializable {
         this.cost = cost;
     }
 
-    public BigInteger getDishId() {
-        return dishId;
-    }
-
-    public void setDishId(BigInteger dishId) {
-        this.dishId = dishId;
-    }
 }

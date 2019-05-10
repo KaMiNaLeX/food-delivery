@@ -1,12 +1,10 @@
 package com.example.food.dto;
 
-import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.math.BigInteger;
 
 public class ClientsDto implements Serializable {
     private BigInteger id;
-    @Pattern(regexp = "")
     private String surname;
     private String phone;
     private String address;

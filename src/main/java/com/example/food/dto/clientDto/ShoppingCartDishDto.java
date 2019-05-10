@@ -1,4 +1,4 @@
-package com.example.food.dto;
+package com.example.food.dto.clientDto;
 
 import java.io.Serializable;
 import java.math.BigInteger;
@@ -6,9 +6,6 @@ import java.math.BigInteger;
 public class ShoppingCartDishDto implements Serializable {
     private BigInteger id;
     private String name;
-    private BigInteger count;
-    private BigInteger sum;
-
 
     public String getName() {
         return name;
@@ -26,19 +23,4 @@ public class ShoppingCartDishDto implements Serializable {
         this.id = id;
     }
 
-    public BigInteger getCount() {
-        return count;
-    }
-
-    public void setCount(BigInteger count) {
-        this.count = count;
-    }
-
-    public BigInteger getSum() {
-        return sum;
-    }
-
-    public void setSum(BigInteger sum) {
-        this.sum = sum;
-    }
 }

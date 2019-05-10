@@ -1,6 +1,6 @@
 package com.example.food.controllers;
 
-import com.example.food.dto.OrdersDto;
+import com.example.food.dto.adminDto.OrdersDto;
 import com.example.food.services.OrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +18,7 @@ public class OrdersController {
         return ordersService.createOrders(ordersDto);
     }
 
+    ///Вывод блюд надо сделать
     @GetMapping("/")
     public List getAllOrders(@RequestParam("page") int page, @RequestParam("size") int size)
             throws  IllegalAccessException {

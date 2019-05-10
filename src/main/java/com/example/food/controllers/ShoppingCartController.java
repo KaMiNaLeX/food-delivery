@@ -1,6 +1,6 @@
 package com.example.food.controllers;
 
-import com.example.food.dto.ShoppingCartDto;
+import com.example.food.dto.adminDto.ShoppingCartDto;
 import com.example.food.services.ShoppingCartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

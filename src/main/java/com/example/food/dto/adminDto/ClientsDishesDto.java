@@ -1,19 +1,21 @@
-package com.example.food.dto;
+package com.example.food.dto.adminDto;
+
+import com.example.food.dto.ClientsDto;
 
 import java.io.Serializable;
 import java.util.List;
 
 public class ClientsDishesDto implements Serializable {
-    private List<MenuDto> menuId;
+    private List<DishesDto> dishId;
     private List<ClientsDto> clientId;
     private List<OrdersDto> orderId;
 
-    public List<MenuDto> getMenuId() {
-        return menuId;
+    public List<DishesDto> getDishId() {
+        return dishId;
     }
 
-    public void setMenuId(List<MenuDto> menuId) {
-        this.menuId = menuId;
+    public void setDishId(List<DishesDto> dishId) {
+        this.dishId = dishId;
     }
 
     public List<ClientsDto> getClientId() {

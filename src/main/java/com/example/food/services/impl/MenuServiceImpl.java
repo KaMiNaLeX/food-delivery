@@ -1,7 +1,6 @@
 package com.example.food.services.impl;
 
-import com.example.food.dto.MenuDishDto;
-import com.example.food.dto.MenuDto;
+import com.example.food.dto.adminDto.MenuDto;
 import com.example.food.models.Menu;
 import com.example.food.repositories.MenuRepository;
 import com.example.food.services.MenuService;
@@ -26,13 +25,6 @@ public class MenuServiceImpl implements MenuService, ModelMapperService {
     private MenuRepository menuRepository;
 
     @Override
-    public List<MenuDto> getAllMenu() {
-        List<MenuDto> menuDtoList = new ArrayList<>();
-        map(menuRepository.findAll(), menuDtoList);
-        return menuDtoList;
-    }
-
-    @Override
     public MenuDto createMenu(MenuDto menuDto) {
         Menu menu = new Menu();
         map(menuDto, menu);
@@ -43,34 +35,29 @@ public class MenuServiceImpl implements MenuService, ModelMapperService {
 
 
     @Override
-    public List getAllMenuDishesParam(int page, int size) throws IllegalAccessException {
+    public List getAllMenu(int page, int size) throws IllegalAccessException {
         Pageable pageable = PageRequest.of(page, size);
-        Page<Map<String, Object>> pageDishes = menuRepository.findAllMenuDishes(pageable);
+        Page<Map<String, Object>> pageDishes = menuRepository.findAllMenu(pageable);
         List<Map<String, Object>> list = pageDishes.getContent();
-        List<MenuDishDto> resultList = new ArrayList<>();
+        List<MenuDto> resultList = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
             Map<String, Object> map = list.get(i);
-            MenuDishDto menuDishDto = new MenuDishDto();
+            MenuDto MenuDto = new MenuDto();
             for (Map.Entry<String, Object> entry : map.entrySet()) {
                 Field field = null;
                 try {
-                    field = MenuDishDto.class.getDeclaredField(entry.getKey());
+                    field = MenuDto.class.getDeclaredField(entry.getKey());
                 } catch (NoSuchFieldException e) {
                     LOGGER.error("getAllMenuDishesParam:NoSuchFieldException");
                 }
                 field.setAccessible(true);
-                field.set(menuDishDto, entry.getValue());
+                field.set(MenuDto, entry.getValue());
             }
-            resultList.add(menuDishDto);
+            resultList.add(MenuDto);
 
         }
         return resultList;
     }
 
-    @Override
-    public List getAllMenuDishesByCategory(String category) {
-        List<MenuDishDto> menuDishDtoList = new ArrayList<>();
-        map(menuRepository.getByCategory(category), menuDishDtoList);
-        return menuDishDtoList;
-    }
+
 }

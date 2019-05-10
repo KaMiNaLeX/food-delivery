@@ -1,6 +1,6 @@
 package com.example.food.controllers;
 
-import com.example.food.dto.MenuDto;
+import com.example.food.dto.adminDto.MenuDto;
 import com.example.food.services.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,17 +13,10 @@ public class MenuController {
     @Autowired
     private MenuService menuService;
 
-
-    @GetMapping("/dishes")
-    public List getAllMenuDishesParam(@RequestParam("page") int page, @RequestParam("size") int size)
-            throws IllegalAccessException {
-        return menuService.getAllMenuDishesParam(page, size);
-    }
-
-
     @GetMapping("/")
-    public List<MenuDto> getAllMenu() {
-        return menuService.getAllMenu();
+    public List getAllMenu(@RequestParam("page") int page, @RequestParam("size") int size)
+            throws IllegalAccessException {
+        return menuService.getAllMenu(page, size);
     }
 
     @PostMapping("/create")
@@ -31,8 +24,4 @@ public class MenuController {
         return menuService.createMenu(menuDto);
     }
 
-    @GetMapping("/category/{category}")
-    public List getAllMenuDishByCategory(@PathVariable("category") String category) {
-        return menuService.getAllMenuDishesByCategory(category);
-    }
 }

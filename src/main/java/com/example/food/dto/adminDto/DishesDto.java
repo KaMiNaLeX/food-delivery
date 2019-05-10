@@ -1,17 +1,22 @@
-package com.example.food.dto;
+package com.example.food.dto.adminDto;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.math.BigInteger;
 
 public class DishesDto implements Serializable {
     private BigInteger id;
     private String description;
-    @NotNull
     private BigInteger mass;
-    @Pattern(regexp = "^\\w{2,45}$")
     private String name;
+    private BigInteger menuId;
+
+    public BigInteger getMenuId() {
+        return menuId;
+    }
+
+    public void setMenuId(BigInteger menuId) {
+        this.menuId = menuId;
+    }
 
     public BigInteger getId() {
         return id;

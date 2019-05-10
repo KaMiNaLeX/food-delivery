@@ -1,15 +1,24 @@
-package com.example.food.dto;
+package com.example.food.dto.adminDto;
 
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.sql.Timestamp;
+import java.util.List;
 
 public class OrdersDto implements Serializable {
     private BigInteger id;
     private BigInteger clientId;
-    private BigInteger couirerId;
     private BigInteger sum;
     private Timestamp timeOrder;
+    private List<DishesDto> dishesDtoList;
+
+    public List<DishesDto> getDishesDtoList() {
+        return dishesDtoList;
+    }
+
+    public void setDishesDtoList(List<DishesDto> dishesDtoList) {
+        this.dishesDtoList = dishesDtoList;
+    }
 
     public Timestamp getTimeOrder() {
         return timeOrder;
@@ -34,15 +43,6 @@ public class OrdersDto implements Serializable {
     public void setClientId(BigInteger clientId) {
         this.clientId = clientId;
     }
-
-    public BigInteger getCouirerId() {
-        return couirerId;
-    }
-
-    public void setCouirerId(BigInteger couirerId) {
-        this.couirerId = couirerId;
-    }
-
 
     public BigInteger getSum() {
         return sum;

@@ -1,7 +1,6 @@
 package com.example.food.services;
 
-import com.example.food.dto.ShoppingCartDishDto;
-import com.example.food.dto.ShoppingCartDto;
+import com.example.food.dto.adminDto.ShoppingCartDto;
 
 import java.util.List;
 

@@ -13,14 +13,7 @@ import java.util.Map;
 
 @Repository
 public interface MenuRepository extends JpaRepository<Menu, Long> {
-    @Query(value = "SELECT D.name ,D.description,D.mass,M.category, M.cost FROM MENU M " +
-            "INNER JOIN DISHES D ON M.dish_id = D.id ", countQuery = "SELECT COUNT(*) FROM MENU M " +
-            "INNER JOIN DISHES D ON M.dish_id = D.id ", nativeQuery = true)
-    Page<Map<String, Object>> findAllMenuDishes(Pageable pageable);
-
-    @Query(value = "SELECT D.name ,D.description,D.mass,M.category, M.cost FROM MENU M " +
-            "INNER JOIN DISHES D ON M.dish_id = D.id WHERE M.category=:category", countQuery = "SELECT COUNT(*) FROM MENU M " +
-            "INNER JOIN DISHES D ON M.dish_id = D.id WHERE M.category=:category", nativeQuery = true)
-    List<Map<String, Object>> getByCategory(@Param("category") String category);
+    @Query(value = "SELECT * FROM MENU ", countQuery = "SELECT COUNT(*) FROM MENU ", nativeQuery = true)
+    Page<Map<String, Object>> findAllMenu(Pageable pageable);
 }
 

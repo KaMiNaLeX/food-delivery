@@ -9,11 +9,9 @@ import java.util.Objects;
 @Table(name = "shopping_cart", schema = "food_delivery", catalog = "")
 public class ShoppingCart {
     private Long id;
-    private Long menuId;
+    private Long dishId;
     private Long clientId;
-    private Long count;
-    private Long sum;
-    private Menu menuByMenuId;
+    private Dishes dishesByDishId;
     private Clients clientsByClientId;
 
     @Id
@@ -28,13 +26,13 @@ public class ShoppingCart {
     }
 
     @Basic
-    @Column(name = "menu_id")
-    public Long getMenuId() {
-        return menuId;
+    @Column(name = "dish_id")
+    public Long getDishId() {
+        return dishId;
     }
 
-    public void setMenuId(Long menuId) {
-        this.menuId = menuId;
+    public void setDishId(Long dishId) {
+        this.dishId = dishId;
     }
 
     @Basic
@@ -47,53 +45,31 @@ public class ShoppingCart {
         this.clientId = clientId;
     }
 
-    @Basic
-    @Column(name = "count")
-    public Long getCount() {
-        return count;
-    }
-
-    public void setCount(Long count) {
-        this.count = count;
-    }
-
-    @Basic
-    @Column(name = "sum")
-    public Long getSum() {
-        return sum;
-    }
-
-    public void setSum(Long sum) {
-        this.sum = sum;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ShoppingCart that = (ShoppingCart) o;
         return Objects.equals(id, that.id) &&
-                Objects.equals(menuId, that.menuId) &&
-                Objects.equals(clientId, that.clientId) &&
-                Objects.equals(count, that.count) &&
-                Objects.equals(sum, that.sum);
+                Objects.equals(dishId, that.dishId) &&
+                Objects.equals(clientId, that.clientId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, menuId, clientId, count, sum);
+        return Objects.hash(id, dishId, clientId);
     }
 
     @ManyToOne
-    @JoinColumn(name = "menu_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "dish_id", referencedColumnName = "id", insertable = false, updatable = false)
     @JsonIgnore
-    public Menu getMenuByMenuId() {
-        return menuByMenuId;
+    public Dishes getDishesByDishId() {
+        return dishesByDishId;
     }
 
     @JsonIgnore
-    public void setMenuByMenuId(Menu menuByMenuId) {
-        this.menuByMenuId = menuByMenuId;
+    public void setDishesByDishId(Dishes dishesByDishId) {
+        this.dishesByDishId = dishesByDishId;
     }
 
     @ManyToOne

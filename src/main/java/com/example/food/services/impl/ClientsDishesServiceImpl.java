@@ -1,6 +1,6 @@
 package com.example.food.services.impl;
 
-import com.example.food.dto.ClientsDishesDto;
+import com.example.food.dto.adminDto.ClientsDishesDto;
 import com.example.food.repositories.ClientsDishesRepository;
 import com.example.food.services.ClientsDishesService;
 import com.example.food.services.ModelMapperService;

@@ -1,8 +1,11 @@
 package com.example.food.services.impl;
 
-import com.example.food.dto.OrderMenuDto;
-import com.example.food.dto.OrdersDto;
+import com.example.food.dto.adminDto.DishesDto;
+import com.example.food.dto.clientDto.OrderMenuDto;
+import com.example.food.dto.adminDto.OrdersDto;
+import com.example.food.models.ClientsDishes;
 import com.example.food.models.Orders;
+import com.example.food.repositories.ClientsDishesRepository;
 import com.example.food.repositories.OrderRepository;
 import com.example.food.services.ModelMapperService;
 import com.example.food.services.OrdersService;
@@ -25,6 +28,8 @@ public class OrdersServiceImpl implements OrdersService, ModelMapperService {
     private final Logger LOGGER = LoggerFactory.getLogger(OrdersServiceImpl.class);
     @Autowired
     private OrderRepository orderRepository;
+    @Autowired
+    private ClientsDishesRepository clientsDishesRepository;
 
     @Override
     public List getAllOrders(int page, int size) throws IllegalAccessException {
@@ -32,7 +37,7 @@ public class OrdersServiceImpl implements OrdersService, ModelMapperService {
         Page<Map<String, Object>> pageOrders = orderRepository.findAllOrders(pageable);
         List<Map<String, Object>> list = pageOrders.getContent();
         List<OrdersDto> resultList = new ArrayList<>();
-        try  {
+        try {
             mapListMapToDto(list, resultList, OrdersDto.class);
         } catch (NoSuchMethodException e) {
             LOGGER.error("getAllOrders:NoSuchMethodException");
@@ -48,7 +53,17 @@ public class OrdersServiceImpl implements OrdersService, ModelMapperService {
     public OrdersDto createOrders(OrdersDto ordersDto) {
         Orders orders = new Orders();
         map(ordersDto, orders);
-        map(orderRepository.save(orders), ordersDto);
+        orders = orderRepository.save(orders);
+        List<DishesDto> dishesDtoList = ordersDto.getDishesDtoList();
+        for (int i = 0; i < dishesDtoList.size(); i++) {
+            ClientsDishes clientsDishes = new ClientsDishes();
+            //map(dishesDtoList.get(i), clientsDishes);
+            clientsDishes.setClientId(ordersDto.getClientId().longValue());
+            clientsDishes.setOrderId(orders.getId());
+            clientsDishes.setDishId(dishesDtoList.get(i).getId().longValue());
+            clientsDishesRepository.save(clientsDishes);
+        }
+        map(orders, ordersDto);
         LOGGER.info("Order create");
         return ordersDto;
     }

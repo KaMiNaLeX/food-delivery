@@ -11,12 +11,10 @@ import java.util.Objects;
 public class Orders {
     private Long id;
     private Long clientId;
-    private Long couirerId;
     private Long sum;
     private Timestamp timeOrder;
     private Collection<ClientsDishes> clientsDishesById;
     private Clients clientsByClientId;
-    private Couirers couirersByCouirerId;
 
     @Id
     @Column(name = "id")
@@ -37,16 +35,6 @@ public class Orders {
 
     public void setClientId(Long clientId) {
         this.clientId = clientId;
-    }
-
-    @Basic
-    @Column(name = "couirer_id")
-    public Long getCouirerId() {
-        return couirerId;
-    }
-
-    public void setCouirerId(Long couirerId) {
-        this.couirerId = couirerId;
     }
 
     @Basic
@@ -76,14 +64,13 @@ public class Orders {
         Orders orders = (Orders) o;
         return Objects.equals(id, orders.id) &&
                 Objects.equals(clientId, orders.clientId) &&
-                Objects.equals(couirerId, orders.couirerId) &&
                 Objects.equals(sum, orders.sum) &&
                 Objects.equals(timeOrder, orders.timeOrder);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, clientId, couirerId, sum, timeOrder);
+        return Objects.hash(id, clientId, sum, timeOrder);
     }
 
     @OneToMany(mappedBy = "ordersByOrderId")
@@ -107,17 +94,5 @@ public class Orders {
     @JsonIgnore
     public void setClientsByClientId(Clients clientsByClientId) {
         this.clientsByClientId = clientsByClientId;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "couirer_id", referencedColumnName = "id", insertable = false, updatable = false)
-    @JsonIgnore
-    public Couirers getCouirersByCouirerId() {
-        return couirersByCouirerId;
-    }
-
-    @JsonIgnore
-    public void setCouirersByCouirerId(Couirers couirersByCouirerId) {
-        this.couirersByCouirerId = couirersByCouirerId;
     }
 }

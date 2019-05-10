@@ -1,13 +1,22 @@
-package com.example.food.dto;
+package com.example.food.dto.clientDto;
 
 import java.math.BigInteger;
 
-public class MenuDishDto {
+public class DishMenuDto {
+    private BigInteger id;
     private String name;
     private String description;
     private BigInteger mass;
     private String category;
     private BigInteger cost;
+
+    public BigInteger getId() {
+        return id;
+    }
+
+    public void setId(BigInteger id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

@@ -9,14 +9,15 @@ import java.util.Objects;
 @Table(name = "clients_dishes", schema = "food_delivery", catalog = "")
 public class ClientsDishes {
     private Long id;
-    private Long menuId;
+    private Long dishId;
     private Long clientId;
     private Long orderId;
-    private Menu menuByMenuId;
+    private Dishes dishesByDishId;
     private Clients clientsByClientId;
     private Orders ordersByOrderId;
 
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
@@ -27,13 +28,13 @@ public class ClientsDishes {
     }
 
     @Basic
-    @Column(name = "menu_id")
-    public Long getMenuId() {
-        return menuId;
+    @Column(name = "dish_id")
+    public Long getDishId() {
+        return dishId;
     }
 
-    public void setMenuId(Long menuId) {
-        this.menuId = menuId;
+    public void setDishId(Long dishId) {
+        this.dishId = dishId;
     }
 
     @Basic
@@ -61,26 +62,27 @@ public class ClientsDishes {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ClientsDishes that = (ClientsDishes) o;
-        return Objects.equals(menuId, that.menuId) &&
+        return Objects.equals(id, that.id) &&
+                Objects.equals(dishId, that.dishId) &&
                 Objects.equals(clientId, that.clientId) &&
                 Objects.equals(orderId, that.orderId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(menuId, clientId, orderId);
+        return Objects.hash(id, dishId, clientId, orderId);
     }
 
     @ManyToOne
-    @JoinColumn(name = "menu_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "dish_id", referencedColumnName = "id", insertable = false, updatable = false)
     @JsonIgnore
-    public Menu getMenuByMenuId() {
-        return menuByMenuId;
+    public Dishes getDishesByDishId() {
+        return dishesByDishId;
     }
 
     @JsonIgnore
-    public void setMenuByMenuId(Menu menuByMenuId) {
-        this.menuByMenuId = menuByMenuId;
+    public void setDishesByDishId(Dishes dishesByDishId) {
+        this.dishesByDishId = dishesByDishId;
     }
 
     @ManyToOne

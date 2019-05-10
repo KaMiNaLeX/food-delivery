@@ -1,6 +1,7 @@
 package com.example.food.services.impl;
 
-import com.example.food.dto.DishesDto;
+import com.example.food.dto.adminDto.DishesDto;
+import com.example.food.dto.clientDto.DishMenuDto;
 import com.example.food.models.Dishes;
 import com.example.food.repositories.DishRepository;
 import com.example.food.services.DishesService;
@@ -51,6 +52,31 @@ public class DishesServiceImpl implements DishesService, ModelMapperService {
     }
 
     @Override
+    public List findAllDishesMenu(int page,int size) throws IllegalAccessException{
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Map<String, Object>> pageDishes = dishRepository.findAllDishesMenu(pageable);
+        List<Map<String, Object>> list = pageDishes.getContent();
+        List<DishMenuDto> resultList = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            Map<String, Object> map = list.get(i);
+            DishMenuDto dishMenuDto = new DishMenuDto();
+            for (Map.Entry<String, Object> entry : map.entrySet()) {
+                Field field = null;
+                try {
+                    field = DishMenuDto.class.getDeclaredField(entry.getKey());
+                } catch (NoSuchFieldException e) {
+                    LOGGER.error("getAllDishes:NoSuchFieldException");
+                }
+                field.setAccessible(true);
+                field.set(dishMenuDto, entry.getValue());
+            }
+            resultList.add(dishMenuDto);
+
+        }
+        return resultList;
+    }
+
+    @Override
     public DishesDto createDish(DishesDto dishesDto) {
         Dishes dishes = new Dishes();
         map(dishesDto, dishes);
@@ -68,5 +94,12 @@ public class DishesServiceImpl implements DishesService, ModelMapperService {
             return dishesDto;
         }
         return null;
+    }
+
+    @Override
+    public List getAllDishesByCategory(String category) {
+        List<DishMenuDto> dishMenuDtoList = new ArrayList<>();
+        map(dishRepository.getByCategory(category), dishMenuDtoList);
+        return dishMenuDtoList;
     }
 }

@@ -11,10 +11,7 @@ public class Menu {
     private Long id;
     private String category;
     private Long cost;
-    private Long dishId;
-    private Collection<ClientsDishes> clientsDishesById;
-    private Dishes dishesByDishId;
-    private Collection<ShoppingCart> shoppingCartsById;
+    private Collection<Dishes> dishesById;
 
     @Id
     @Column(name = "id")
@@ -47,16 +44,6 @@ public class Menu {
         this.cost = cost;
     }
 
-    @Basic
-    @Column(name = "dish_id")
-    public Long getDishId() {
-        return dishId;
-    }
-
-    public void setDishId(Long dishId) {
-        this.dishId = dishId;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -64,46 +51,22 @@ public class Menu {
         Menu menu = (Menu) o;
         return Objects.equals(id, menu.id) &&
                 Objects.equals(category, menu.category) &&
-                Objects.equals(cost, menu.cost) &&
-                Objects.equals(dishId, menu.dishId);
+                Objects.equals(cost, menu.cost);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, category, cost, dishId);
+        return Objects.hash(id, category, cost);
     }
 
     @OneToMany(mappedBy = "menuByMenuId")
     @JsonIgnore
-    public Collection<ClientsDishes> getClientsDishesById() {
-        return clientsDishesById;
+    public Collection<Dishes> getDishesById() {
+        return dishesById;
     }
 
     @JsonIgnore
-    public void setClientsDishesById(Collection<ClientsDishes> clientsDishesById) {
-        this.clientsDishesById = clientsDishesById;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "dish_id", referencedColumnName = "id", insertable = false, updatable = false)
-    @JsonIgnore
-    public Dishes getDishesByDishId() {
-        return dishesByDishId;
-    }
-
-    @JsonIgnore
-    public void setDishesByDishId(Dishes dishesByDishId) {
-        this.dishesByDishId = dishesByDishId;
-    }
-
-    @OneToMany(mappedBy = "menuByMenuId")
-    @JsonIgnore
-    public Collection<ShoppingCart> getShoppingCartsById() {
-        return shoppingCartsById;
-    }
-
-    @JsonIgnore
-    public void setShoppingCartsById(Collection<ShoppingCart> shoppingCartsById) {
-        this.shoppingCartsById = shoppingCartsById;
+    public void setDishesById(Collection<Dishes> dishesById) {
+        this.dishesById = dishesById;
     }
 }

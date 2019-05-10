@@ -12,7 +12,10 @@ public class Dishes {
     private String description;
     private Long mass;
     private String name;
-    private Collection<Menu> menusById;
+    private Long menuId;
+    private Collection<ClientsDishes> clientsDishesById;
+    private Menu menuByMenuId;
+    private Collection<ShoppingCart> shoppingCartsById;
 
     @Id
     @Column(name = "id")
@@ -55,6 +58,16 @@ public class Dishes {
         this.name = name;
     }
 
+    @Basic
+    @Column(name = "menu_id")
+    public Long getMenuId() {
+        return menuId;
+    }
+
+    public void setMenuId(Long menuId) {
+        this.menuId = menuId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -63,22 +76,46 @@ public class Dishes {
         return Objects.equals(id, dishes.id) &&
                 Objects.equals(description, dishes.description) &&
                 Objects.equals(mass, dishes.mass) &&
-                Objects.equals(name, dishes.name);
+                Objects.equals(name, dishes.name) &&
+                Objects.equals(menuId, dishes.menuId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, description, mass, name);
+        return Objects.hash(id, description, mass, name, menuId);
     }
 
     @OneToMany(mappedBy = "dishesByDishId")
     @JsonIgnore
-    public Collection<Menu> getMenusById() {
-        return menusById;
+    public Collection<ClientsDishes> getClientsDishesById() {
+        return clientsDishesById;
     }
 
     @JsonIgnore
-    public void setMenusById(Collection<Menu> menusById) {
-        this.menusById = menusById;
+    public void setClientsDishesById(Collection<ClientsDishes> clientsDishesById) {
+        this.clientsDishesById = clientsDishesById;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "menu_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JsonIgnore
+    public Menu getMenuByMenuId() {
+        return menuByMenuId;
+    }
+
+    @JsonIgnore
+    public void setMenuByMenuId(Menu menuByMenuId) {
+        this.menuByMenuId = menuByMenuId;
+    }
+
+    @OneToMany(mappedBy = "dishesByDishId")
+    @JsonIgnore
+    public Collection<ShoppingCart> getShoppingCartsById() {
+        return shoppingCartsById;
+    }
+
+    @JsonIgnore
+    public void setShoppingCartsById(Collection<ShoppingCart> shoppingCartsById) {
+        this.shoppingCartsById = shoppingCartsById;
     }
 }

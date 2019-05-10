@@ -1,6 +1,7 @@
-package com.example.food.dto;
+package com.example.food.dto.clientDto;
 
 import java.math.BigInteger;
+import java.sql.Timestamp;
 
 public class OrderMenuDto {
     private BigInteger id;
@@ -8,6 +9,15 @@ public class OrderMenuDto {
     private String phone;
     private String address;
     private BigInteger sum;
+    private Timestamp timeOrder;
+
+    public Timestamp getTimeOrder() {
+        return timeOrder;
+    }
+
+    public void setTimeOrder(Timestamp timeOrder) {
+        this.timeOrder = timeOrder;
+    }
 
     public BigInteger getId() {
         return id;
