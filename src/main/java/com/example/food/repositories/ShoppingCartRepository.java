@@ -16,4 +16,5 @@ public interface ShoppingCartRepository extends JpaRepository<ShoppingCart, Long
             , countQuery = "SELECT COUNT(*) FROM SHOPPING_CART S " +
             "INNER JOIN DISHES D ON D.id = S.dish_id", nativeQuery = true)
     Page<Map<String, Object>> findAllShoppingCartDishes(Pageable pageable);
+
 }

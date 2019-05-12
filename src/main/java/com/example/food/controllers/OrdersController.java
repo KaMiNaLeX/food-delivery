@@ -34,4 +34,10 @@ public class OrdersController {
     public List getAllOrdersParam(@PathVariable("login") String login) {
         return ordersService.getAllOrdersParam(login);
     }
+
+    @GetMapping("/dishes/{login},{orderId}")
+    public List getDishesByLoginAndOrderId(@PathVariable("login") String login,
+                                           @PathVariable("orderId") Long orderId){
+        return ordersService.getDishesByLoginAndOrderId(login, orderId);
+    }
 }

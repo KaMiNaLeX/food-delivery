@@ -23,4 +23,10 @@ public class ShoppingCartController {
             throws IllegalAccessException {
         return shoppingCartService.getAllShoppingCartDish(page, size);
     }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable("id") Long id) {
+         shoppingCartService.deleteShoppingCartDish(id);
+         return ;
+    }
 }

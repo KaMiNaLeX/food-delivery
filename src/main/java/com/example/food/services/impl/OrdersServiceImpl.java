@@ -1,6 +1,7 @@
 package com.example.food.services.impl;
 
 import com.example.food.dto.adminDto.DishesDto;
+import com.example.food.dto.clientDto.OrderDishDto;
 import com.example.food.dto.clientDto.OrderMenuDto;
 import com.example.food.dto.adminDto.OrdersDto;
 import com.example.food.models.ClientsDishes;
@@ -84,5 +85,12 @@ public class OrdersServiceImpl implements OrdersService, ModelMapperService {
         List<OrderMenuDto> orderMenuDtoList = new ArrayList<>();
         map(orderRepository.getByLogin(login), orderMenuDtoList);
         return orderMenuDtoList;
+    }
+
+    @Override
+    public List getDishesByLoginAndOrderId(String login,Long orderId){
+        List<OrderDishDto> orderDishDtoList = new ArrayList<>();
+        map(orderRepository.getDishesByLoginAndOrderId(login, orderId), orderDishDtoList);
+        return orderDishDtoList;
     }
 }

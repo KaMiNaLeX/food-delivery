@@ -59,5 +59,11 @@ public class ShoppingCartServiceImpl implements ShoppingCartService, ModelMapper
         return resultList;
     }
 
+    @Override
+    public void deleteShoppingCartDish(Long id) {
+        shoppingCartRepository.deleteById(id);
+
+    }
+
 
 }

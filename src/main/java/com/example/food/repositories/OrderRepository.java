@@ -21,4 +21,18 @@ public interface OrderRepository extends JpaRepository<Orders, Long> {
     @Query(value = "SELECT * FROM ORDERS ",
             countQuery = "SELECT COUNT(*) FROM ORDERS ", nativeQuery = true)
     Page<Map<String, Object>> findAllOrders(Pageable pageable);
+
+    @Query(value = "SELECT D.NAME,D.DESCRIPTION,D.MASS,M.CATEGORY FROM CLIENTS C " +
+    "INNER JOIN ORDERS O ON C.ID = O.CLIENT_ID " +
+    "INNER JOIN CLIENTS_DISHES CD ON CD.ORDER_ID = O.ID " +
+    "INNER JOIN DISHES D ON D.ID = CD.DISH_ID " +
+    "INNER JOIN MENU M ON D.MENU_ID = M.ID WHERE C.LOGIN=:LOGIN AND O.ID=:ORDERID",
+    countQuery = "SELECT COUNT (*) FROM CLIENTS C " +
+            "INNER JOIN ORDERS O ON C.ID = O.CLIENT_ID " +
+            "INNER JOIN CLIENTS_DISHES CD ON CD.ORDER_ID = O.ID " +
+            "INNER JOIN DISHES D ON D.ID = CD.DISH_ID " +
+            "INNER JOIN MENU M ON D.MENU_ID = M.ID " +
+            "WHERE C.LOGIN=:LOGIN AND O.ID=:ORDERID", nativeQuery = true)
+    List<Map<String, Object>> getDishesByLoginAndOrderId(@Param("LOGIN") String login,
+                                                       @Param("ORDERID") Long orderId);
 }

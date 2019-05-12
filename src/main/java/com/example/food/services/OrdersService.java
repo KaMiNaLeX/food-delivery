@@ -12,4 +12,6 @@ public interface OrdersService {
     OrdersDto getOrderById(Long id);
 
     List getAllOrdersParam(String login);
+
+    List getDishesByLoginAndOrderId(String login,Long orderId);
 }

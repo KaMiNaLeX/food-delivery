@@ -6,6 +6,7 @@ import com.example.food.models.Dishes;
 import com.example.food.repositories.DishRepository;
 import com.example.food.services.DishesService;
 import com.example.food.services.ModelMapperService;
+import com.example.food.services.helpers.DbFieldsParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class DishesServiceImpl implements DishesService, ModelMapperService {
     private DishRepository dishRepository;
 
     @Override
-    public List getAllDishes(int page,int size) throws IllegalAccessException{
+    public List getAllDishes(int page, int size) throws IllegalAccessException {
         Pageable pageable = PageRequest.of(page, size);
         Page<Map<String, Object>> pageDishes = dishRepository.findAllDishes(pageable);
         List<Map<String, Object>> list = pageDishes.getContent();
@@ -37,10 +38,18 @@ public class DishesServiceImpl implements DishesService, ModelMapperService {
             DishesDto dishesDto = new DishesDto();
             for (Map.Entry<String, Object> entry : map.entrySet()) {
                 Field field = null;
+
                 try {
-                    field = DishesDto.class.getDeclaredField(entry.getKey());
+                    if (DbFieldsParser.getDtoFieldFromDb(entry.getKey()) == null) {
+                        field = DishesDto.class.
+                                getDeclaredField(entry.getKey());
+                    } else {
+                        field = DishesDto.class.
+                                getDeclaredField(DbFieldsParser.getDtoFieldFromDb(entry.getKey()));
+                    }
+
                 } catch (NoSuchFieldException e) {
-                    LOGGER.error("getAllDishes:NoSuchFieldException");
+                    continue;
                 }
                 field.setAccessible(true);
                 field.set(dishesDto, entry.getValue());
@@ -52,7 +61,7 @@ public class DishesServiceImpl implements DishesService, ModelMapperService {
     }
 
     @Override
-    public List findAllDishesMenu(int page,int size) throws IllegalAccessException{
+    public List findAllDishesMenu(int page, int size) throws IllegalAccessException {
         Pageable pageable = PageRequest.of(page, size);
         Page<Map<String, Object>> pageDishes = dishRepository.findAllDishesMenu(pageable);
         List<Map<String, Object>> list = pageDishes.getContent();
