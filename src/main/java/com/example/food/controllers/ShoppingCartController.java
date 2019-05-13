@@ -5,6 +5,8 @@ import com.example.food.services.ShoppingCartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,10 +20,19 @@ public class ShoppingCartController {
         return shoppingCartService.createShoppingCart(shoppingCartDto);
     }
 
-    @GetMapping("/dishes")
+    @GetMapping("/")
     public List getAllShoppingCartDishes(@RequestParam("page") int page, @RequestParam("size") int size)
             throws IllegalAccessException {
-        return shoppingCartService.getAllShoppingCartDish(page, size);
+        return shoppingCartService.findAllShoppingCart(page, size);
+    }
+
+    @GetMapping("/{login}")
+    public List getByClientLogin(@PathVariable("login") String login, Principal principal) {
+        if (!principal.getName().equals(login)) {
+            return new ArrayList();
+
+        }
+        return shoppingCartService.getByClientLogin(login);
     }
 
     @DeleteMapping("/{id}")

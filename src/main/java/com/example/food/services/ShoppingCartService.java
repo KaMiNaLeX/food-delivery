@@ -8,7 +8,9 @@ public interface ShoppingCartService {
 
     ShoppingCartDto createShoppingCart(ShoppingCartDto shoppingCartDto);
 
-    List getAllShoppingCartDish(int page, int size) throws IllegalAccessException;
+    List findAllShoppingCart(int page, int size) throws IllegalAccessException;
+
+    List getByClientLogin(String login);
 
     void deleteShoppingCartDish(Long id);
 }
