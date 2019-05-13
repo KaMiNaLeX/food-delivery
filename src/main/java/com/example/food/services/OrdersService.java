@@ -13,5 +13,8 @@ public interface OrdersService {
 
     List getAllOrdersParam(String login);
 
-    List getDishesByLoginAndOrderId(String login,Long orderId);
+    List getDishesByLogin(String login);
+
+    List getDishesByOrderId(Long orderId);
+
 }

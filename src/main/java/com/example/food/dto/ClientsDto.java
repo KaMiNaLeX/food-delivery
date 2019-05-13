@@ -1,5 +1,7 @@
 package com.example.food.dto;
 
+import com.example.food.services.security.UserRole;
+
 import java.io.Serializable;
 import java.math.BigInteger;
 
@@ -10,6 +12,15 @@ public class ClientsDto implements Serializable {
     private String address;
     private String login;
     private String password;
+    private UserRole userRole;
+
+    public UserRole getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
+    }
 
     public String getPassword() {
         return password;

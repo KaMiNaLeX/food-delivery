@@ -5,12 +5,14 @@ import com.example.food.models.Clients;
 import com.example.food.repositories.ClientRepository;
 import com.example.food.services.ClientsService;
 import com.example.food.services.ModelMapperService;
+import com.example.food.services.security.UserRole;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
@@ -24,6 +26,8 @@ public class ClientServiceImpl implements ModelMapperService, ClientsService {
     private final Logger LOGGER = LoggerFactory.getLogger(ClientServiceImpl.class);
     @Autowired
     private ClientRepository clientRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public List getAllClients(int page, int size) throws IllegalAccessException {
@@ -39,7 +43,8 @@ public class ClientServiceImpl implements ModelMapperService, ClientsService {
                 try {
                     field = ClientsDto.class.getDeclaredField(entry.getKey());
                 } catch (NoSuchFieldException e) {
-                    LOGGER.error("getAllClients:NoSuchFieldException");
+                    LOGGER.warn("getAllClients:NoSuchFieldException");
+                    continue;
                 }
                 field.setAccessible(true);
                 field.set(clientsDto, entry.getValue());
@@ -53,6 +58,8 @@ public class ClientServiceImpl implements ModelMapperService, ClientsService {
 
     @Override
     public ClientsDto createClients(ClientsDto clientsDto) {
+        clientsDto.setUserRole(UserRole.SIMPLE_USER_ROLE);
+        clientsDto.setPassword(passwordEncoder.encode(clientsDto.getPassword()));
         Clients clients = new Clients();
         map(clientsDto, clients);
         map(clientRepository.save(clients), clientsDto);
@@ -65,7 +72,7 @@ public class ClientServiceImpl implements ModelMapperService, ClientsService {
         Optional<Clients> optionalClients = clientRepository.findById(id);
         if (optionalClients.isPresent()) {
             ClientsDto clientsDto = new ClientsDto();
-            map(optionalClients.get(),clientsDto);
+            map(optionalClients.get(), clientsDto);
             return clientsDto;
         }
         return null;
@@ -77,4 +84,13 @@ public class ClientServiceImpl implements ModelMapperService, ClientsService {
         map(clientRepository.getByLogin(login), clientsDtoList);
         return clientsDtoList;
     }
+
+    @Override
+    public ClientsDto getByLogin(String login) {
+        ClientsDto clientsDto = new ClientsDto();
+        map(clientRepository.findByLogin(login),clientsDto);
+        return clientsDto;
+    }
+
+
 }

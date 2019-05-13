@@ -20,4 +20,6 @@ public interface ClientRepository extends JpaRepository<Clients, Long> {
             countQuery = "SELECT COUNT(*) FROM CLIENTS C WHERE C.LOGIN=:LOGIN", nativeQuery = true)
     List<Map<String, Object>> getByLogin(@Param("LOGIN") String login);
 
+    Clients findByLogin(String login);
+
 }

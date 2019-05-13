@@ -1,5 +1,6 @@
 package com.example.food.models;
 
+import com.example.food.services.security.UserRole;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -14,9 +15,21 @@ public class Clients {
     private String address;
     private String login;
     private String password;
+    private UserRole userRole;
     private Collection<ClientsDishes> clientsDishesById;
     private Collection<Orders> ordersById;
     private Collection<ShoppingCart> shoppingCartsById;
+
+    @Basic
+    @Enumerated(EnumType.STRING)
+    @Column(name = "user_role")
+    public UserRole getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
+    }
 
     @Id
     @Column(name = "id")

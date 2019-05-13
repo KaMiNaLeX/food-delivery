@@ -22,17 +22,32 @@ public interface OrderRepository extends JpaRepository<Orders, Long> {
             countQuery = "SELECT COUNT(*) FROM ORDERS ", nativeQuery = true)
     Page<Map<String, Object>> findAllOrders(Pageable pageable);
 
-    @Query(value = "SELECT D.NAME,D.DESCRIPTION,D.MASS,M.CATEGORY FROM CLIENTS C " +
+    @Query(value = "SELECT O.ID,C.LOGIN,C.PHONE,C.ADDRESS,O.SUM,O.TIME_ORDER, " +
+    "D.NAME,D.DESCRIPTION,D.MASS,M.CATEGORY FROM CLIENTS C " +
     "INNER JOIN ORDERS O ON C.ID = O.CLIENT_ID " +
     "INNER JOIN CLIENTS_DISHES CD ON CD.ORDER_ID = O.ID " +
     "INNER JOIN DISHES D ON D.ID = CD.DISH_ID " +
-    "INNER JOIN MENU M ON D.MENU_ID = M.ID WHERE C.LOGIN=:LOGIN AND O.ID=:ORDERID",
+    "INNER JOIN MENU M ON D.MENU_ID = M.ID WHERE C.LOGIN=:LOGIN",
     countQuery = "SELECT COUNT (*) FROM CLIENTS C " +
             "INNER JOIN ORDERS O ON C.ID = O.CLIENT_ID " +
             "INNER JOIN CLIENTS_DISHES CD ON CD.ORDER_ID = O.ID " +
             "INNER JOIN DISHES D ON D.ID = CD.DISH_ID " +
             "INNER JOIN MENU M ON D.MENU_ID = M.ID " +
-            "WHERE C.LOGIN=:LOGIN AND O.ID=:ORDERID", nativeQuery = true)
-    List<Map<String, Object>> getDishesByLoginAndOrderId(@Param("LOGIN") String login,
-                                                       @Param("ORDERID") Long orderId);
+            "WHERE C.LOGIN=:LOGIN ", nativeQuery = true)
+    List<Map<String, Object>> getDishesByLogin(@Param("LOGIN") String login);
+
+    @Query(value = "SELECT D.NAME,D.DESCRIPTION,D.MASS,M.CATEGORY,O.id,O.client_id,O.sum,O.time_order" +
+            " FROM CLIENTS C " +
+            "INNER JOIN ORDERS O ON C.ID = O.CLIENT_ID " +
+            "INNER JOIN CLIENTS_DISHES CD ON CD.ORDER_ID = O.ID " +
+            "INNER JOIN DISHES D ON D.ID = CD.DISH_ID " +
+            "INNER JOIN MENU M ON D.MENU_ID = M.ID WHERE O.ID =:ORDERID ",
+            countQuery = "SELECT COUNT (*) FROM CLIENTS C " +
+                    "INNER JOIN ORDERS O ON C.ID = O.CLIENT_ID " +
+                    "INNER JOIN CLIENTS_DISHES CD ON CD.ORDER_ID = O.ID " +
+                    "INNER JOIN DISHES D ON D.ID = CD.DISH_ID " +
+                    "INNER JOIN MENU M ON D.MENU_ID = M.ID " +
+                    "WHERE O.ID=:ORDERID", nativeQuery = true)
+    List<Map<String, Object>> getDishesByOrderId(@Param("ORDERID") Long orderId);
+
 }

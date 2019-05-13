@@ -88,9 +88,18 @@ public class OrdersServiceImpl implements OrdersService, ModelMapperService {
     }
 
     @Override
-    public List getDishesByLoginAndOrderId(String login,Long orderId){
-        List<OrderDishDto> orderDishDtoList = new ArrayList<>();
-        map(orderRepository.getDishesByLoginAndOrderId(login, orderId), orderDishDtoList);
-        return orderDishDtoList;
+    public List getDishesByLogin(String login){
+        List<OrderMenuDto> orderMenuDtoList = new ArrayList<>();
+        map(orderRepository.getDishesByLogin(login), orderMenuDtoList);
+        return orderMenuDtoList;
     }
+
+    @Override
+    public List getDishesByOrderId(Long orderId){
+        List<OrdersDto> ordersDtoList = new ArrayList<>();
+        map(orderRepository.getDishesByOrderId(orderId),ordersDtoList);
+        return ordersDtoList;
+    }
+
+
 }
