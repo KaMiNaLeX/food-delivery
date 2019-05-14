@@ -22,8 +22,8 @@ public interface OrderRepository extends JpaRepository<Orders, Long> {
             countQuery = "SELECT COUNT(*) FROM ORDERS ", nativeQuery = true)
     Page<Map<String, Object>> findAllOrders(Pageable pageable);
 
-    @Query(value = "SELECT O.ID,C.LOGIN,C.PHONE,C.ADDRESS,O.SUM,O.TIME_ORDER, " +
-    "D.NAME,D.DESCRIPTION,D.MASS,M.CATEGORY FROM CLIENTS C " +
+    @Query(value = "SELECT O.ID,O.SUM,O.TIME_ORDER, " +
+    "D.NAME,D.DESCRIPTION,M.CATEGORY FROM CLIENTS C " +
     "INNER JOIN ORDERS O ON C.ID = O.CLIENT_ID " +
     "INNER JOIN CLIENTS_DISHES CD ON CD.ORDER_ID = O.ID " +
     "INNER JOIN DISHES D ON D.ID = CD.DISH_ID " +

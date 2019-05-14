@@ -1,11 +1,8 @@
 package com.example.food.dto.clientDto;
 
-import java.math.BigInteger;
-
 public class OrderDishDto {
     private String name;
     private String description;
-    private BigInteger mass;
     private String category;
 
     public String getName() {
@@ -24,13 +21,6 @@ public class OrderDishDto {
         this.description = description;
     }
 
-    public BigInteger getMass() {
-        return mass;
-    }
-
-    public void setMass(BigInteger mass) {
-        this.mass = mass;
-    }
 
     public String getCategory() {
         return category;
