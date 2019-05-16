@@ -1,6 +1,7 @@
 package com.example.food.controllers;
 
 import com.example.food.dto.adminDto.DishesDto;
+import com.example.food.dto.clientDto.DishMenuDto;
 import com.example.food.services.DishesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -39,4 +40,10 @@ public class DishesController {
     public List getAllDishesByCategory(@PathVariable("category") String category) {
         return dishesService.getAllDishesByCategory(category);
     }
+
+    @GetMapping("/id/{id}")
+    public List getById(@PathVariable("id") Long id){
+        return dishesService.ById(id);
+    }
+
 }

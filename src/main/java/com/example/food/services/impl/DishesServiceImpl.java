@@ -111,4 +111,11 @@ public class DishesServiceImpl implements DishesService, ModelMapperService {
         map(dishRepository.getByCategory(category), dishMenuDtoList);
         return dishMenuDtoList;
     }
+
+    @Override
+    public List ById(Long id) {
+        List<DishMenuDto> dishMenuDtoList = new ArrayList<>();
+        map(dishRepository.ById(id), dishMenuDtoList);
+        return dishMenuDtoList;
+    }
 }

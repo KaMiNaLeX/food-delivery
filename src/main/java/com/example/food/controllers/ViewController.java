@@ -16,22 +16,42 @@ public class ViewController {
     }
 
     @RequestMapping(value = "/check-out")
-    public String checkout(){
+    public String checkout() {
         return "check-out";
     }
 
     @RequestMapping(value = "/listing")
-    public String listing(){
+    public String listing() {
         return "listing";
     }
 
     @RequestMapping(value = "/single")
-    public String single(){
+    public String single() {
         return "single";
     }
 
     @RequestMapping(value = "/orders")
     public String orders() {
         return "orders";
+    }
+
+    @RequestMapping(value = "/burgers")
+    public String burgers() {
+        return "burgers";
+    }
+
+    @RequestMapping(value = "/deserts")
+    public String deserts() {
+        return "deserts";
+    }
+
+    @RequestMapping(value = "/drinks")
+    public String drinks() {
+        return "drinks";
+    }
+
+    @RequestMapping(value = "/pizza")
+    public String pizza() {
+        return "pizza";
     }
 }

@@ -22,4 +22,5 @@ public interface ClientRepository extends JpaRepository<Clients, Long> {
 
     Clients findByLogin(String login);
 
+
 }

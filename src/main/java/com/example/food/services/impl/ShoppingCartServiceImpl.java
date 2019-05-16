@@ -4,6 +4,7 @@ import com.example.food.dto.adminDto.DishesDto;
 import com.example.food.dto.adminDto.ShoppingCartDto;
 import com.example.food.dto.clientDto.ShoppingCartDishDto;
 import com.example.food.models.ShoppingCart;
+import com.example.food.repositories.ClientRepository;
 import com.example.food.repositories.ShoppingCartRepository;
 import com.example.food.services.ModelMapperService;
 import com.example.food.services.ShoppingCartService;

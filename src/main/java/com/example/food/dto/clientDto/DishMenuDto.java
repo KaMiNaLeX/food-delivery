@@ -10,6 +10,7 @@ public class DishMenuDto {
     private String category;
     private BigInteger cost;
 
+
     public BigInteger getId() {
         return id;
     }
