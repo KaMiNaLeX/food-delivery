@@ -8,7 +8,16 @@ public class DishesDto implements Serializable {
     private String description;
     private BigInteger mass;
     private String name;
+    private String imgSource;
     private BigInteger menuId;
+
+    public String getImgSource() {
+        return imgSource;
+    }
+
+    public void setImgSource(String imgSource) {
+        this.imgSource = imgSource;
+    }
 
     public BigInteger getMenuId() {
         return menuId;

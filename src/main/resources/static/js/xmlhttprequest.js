@@ -32,17 +32,18 @@ function fmcb() {
         document.getElementsByName("name")[0].textContent = dishesDto[0].name;
         document.getElementsByName("cost")[0].textContent = dishesDto[0].cost + "$";
         document.getElementsByName("descriptionn")[0].textContent = dishesDto[0].description;
-        document.getElementsByName("img")[0].src = "http://localhost:8080/images/" + [1] + "_" + [0] + ".png";
+        document.getElementsByName("img")[0].src = "http://localhost:8080" + dishesDto[0].imgSource;
+        console.log(dishesDto[0].imgSource);
 
         document.getElementsByName("name")[1].textContent = dishesDto[11].name;
         document.getElementsByName("cost")[1].textContent = dishesDto[11].cost + "$";
         document.getElementsByName("descriptionn")[1].textContent = dishesDto[11].description;
-        document.getElementsByName("img")[1].src = "http://localhost:8080/images/" + [4] + "_" + [1] + ".png";
+        document.getElementsByName("img")[1].src = "http://localhost:8080" + dishesDto[11].imgSource;
 
         document.getElementsByName("name")[2].textContent = dishesDto[8].name;
         document.getElementsByName("cost")[2].textContent = dishesDto[8].cost + "$";
         document.getElementsByName("descriptionn")[2].textContent = dishesDto[8].description;
-        document.getElementsByName("img")[2].src = "http://localhost:8080/images/" + [3] + "_" + [0] + ".png";
+        document.getElementsByName("img")[2].src = "http://localhost:8080" + dishesDto[8].imgSource;
 
 
     }
@@ -114,7 +115,7 @@ function get(url, cb) {
 
 function loadburgers() {
 
-    get("/dishes/category/burger", loadb)
+    get("/dishes/category/Burger", loadb)
 
 }
 
@@ -148,15 +149,13 @@ function loadb() {
 
             var div2 = div.cloneNode(true);
             div.parentNode.insertBefore(div2, div);
-            //console.log(document.getElementsByName("id")[i].value);
             document.getElementsByName("id")[i].textContent = dishesDto[i].id;
             document.getElementsByName("name")[i].textContent = dishesDto[i].name;
             document.getElementsByName("category")[i].textContent = dishesDto[i].category;
             document.getElementsByName("mass")[i].textContent = dishesDto[i].mass;
             document.getElementsByName("cost")[i].textContent = dishesDto[i].cost + "$";
-            document.getElementsByName("description")[i].textContent = dishesDto[i].description;
-            document.getElementsByName("img")[i].src = "http://localhost:8080/images/2_" + [i] + ".png";
-            //console.log(document.getElementsByName("description")[i].textContent);
+            document.getElementsByName("descriptionn")[i].textContent = dishesDto[i].description;
+            document.getElementsByName("img")[i].src = "http://localhost:8080" + dishesDto[i].img_source;
         }
         div.hidden = true;
 
@@ -182,9 +181,9 @@ function loadp() {
             document.getElementsByName("category")[i].textContent = dishesDto[i].category;
             document.getElementsByName("mass")[i].textContent = dishesDto[i].mass;
             document.getElementsByName("cost")[i].textContent = dishesDto[i].cost + "$";
-            document.getElementsByName("description")[i].textContent = dishesDto[i].description;
-            document.getElementsByName("img")[i].src = "http://localhost:8080/images/1_" + [i] + ".png";
-            //console.log(document.getElementsByName("description")[i].textContent);
+            document.getElementsByName("descriptionn")[i].textContent = dishesDto[i].description;
+            document.getElementsByName("img")[i].src = "http://localhost:8080" + dishesDto[i].img_source;
+            console.log(document.getElementsByName("img")[i].src)
         }
         div.hidden = true;
 
@@ -210,9 +209,8 @@ function loaddr() {
             document.getElementsByName("category")[i].textContent = dishesDto[i].category;
             document.getElementsByName("mass")[i].textContent = dishesDto[i].mass;
             document.getElementsByName("cost")[i].textContent = dishesDto[i].cost + "$";
-            document.getElementsByName("description")[i].textContent = dishesDto[i].description;
-            document.getElementsByName("img")[i].src = "http://localhost:8080/images/3_" + [i] + ".png";
-            //console.log(document.getElementsByName("description")[i].textContent);
+            document.getElementsByName("descriptionn")[i].textContent = dishesDto[i].description;
+            document.getElementsByName("img")[i].src = "http://localhost:8080" + dishesDto[i].img_source;
         }
         div.hidden = true;
 
@@ -238,9 +236,8 @@ function loadde() {
             document.getElementsByName("category")[i].textContent = dishesDto[i].category;
             document.getElementsByName("mass")[i].textContent = dishesDto[i].mass;
             document.getElementsByName("cost")[i].textContent = dishesDto[i].cost + "$";
-            document.getElementsByName("description")[i].textContent = dishesDto[i].description;
-            document.getElementsByName("img")[i].src = "http://localhost:8080/images/4_" + [i] + ".png";
-            //console.log(document.getElementsByName("description")[i].textContent);
+            document.getElementsByName("descriptionn")[i].textContent = dishesDto[i].description;
+            document.getElementsByName("img")[i].src = "http://localhost:8080" + dishesDto[i].img_source;
         }
         div.hidden = true;
 

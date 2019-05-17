@@ -14,6 +14,7 @@ public class DishesController {
     @Autowired
     private DishesService dishesService;
 
+
     @GetMapping("/")
     public List getAllDishes(@RequestParam("page") int page, @RequestParam("size") int size)
             throws IllegalAccessException {

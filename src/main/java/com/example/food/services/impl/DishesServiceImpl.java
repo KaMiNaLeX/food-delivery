@@ -72,9 +72,16 @@ public class DishesServiceImpl implements DishesService, ModelMapperService {
             for (Map.Entry<String, Object> entry : map.entrySet()) {
                 Field field = null;
                 try {
-                    field = DishMenuDto.class.getDeclaredField(entry.getKey());
+                    if (DbFieldsParser.getDtoFieldFromDb(entry.getKey()) == null) {
+                        field = DishMenuDto.class.
+                                getDeclaredField(entry.getKey());
+                    } else {
+                        field = DishMenuDto.class.
+                                getDeclaredField(DbFieldsParser.getDtoFieldFromDb(entry.getKey()));
+                    }
+
                 } catch (NoSuchFieldException e) {
-                    LOGGER.error("getAllDishes:NoSuchFieldException");
+                    continue;
                 }
                 field.setAccessible(true);
                 field.set(dishMenuDto, entry.getValue());

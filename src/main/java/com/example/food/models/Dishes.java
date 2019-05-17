@@ -12,6 +12,7 @@ public class Dishes {
     private String description;
     private Long mass;
     private String name;
+    private String imgSource;
     private Long menuId;
     private Collection<ClientsDishes> clientsDishesById;
     private Menu menuByMenuId;
@@ -58,6 +59,17 @@ public class Dishes {
         this.name = name;
     }
 
+
+    @Basic
+    @Column(name = "imgSource")
+    public String getImgSource() {
+        return imgSource;
+    }
+
+    public void setImgSource(String imgSource) {
+        this.imgSource = imgSource;
+    }
+
     @Basic
     @Column(name = "menu_id")
     public Long getMenuId() {
@@ -77,12 +89,13 @@ public class Dishes {
                 Objects.equals(description, dishes.description) &&
                 Objects.equals(mass, dishes.mass) &&
                 Objects.equals(name, dishes.name) &&
-                Objects.equals(menuId, dishes.menuId);
+                Objects.equals(menuId, dishes.menuId) &&
+                Objects.equals(imgSource, dishes.imgSource);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, description, mass, name, menuId);
+        return Objects.hash(id, description, mass, name, imgSource, menuId);
     }
 
     @OneToMany(mappedBy = "dishesByDishId")

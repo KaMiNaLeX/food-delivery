@@ -4,12 +4,22 @@ import java.math.BigInteger;
 
 public class DishMenuDto {
     private BigInteger id;
-    private String name;
     private String description;
     private BigInteger mass;
+    private String name;
+    private String imgSource;
     private String category;
     private BigInteger cost;
 
+
+
+    public String getImgSource() {
+        return imgSource;
+    }
+
+    public void setImgSource(String imgSource) {
+        this.imgSource = imgSource;
+    }
 
     public BigInteger getId() {
         return id;
