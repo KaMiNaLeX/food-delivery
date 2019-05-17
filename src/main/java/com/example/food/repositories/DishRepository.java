@@ -1,6 +1,5 @@
 package com.example.food.repositories;
 
-import com.example.food.dto.clientDto.DishMenuDto;
 import com.example.food.models.Dishes;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @Repository
 public interface DishRepository extends JpaRepository<Dishes, Long> {
@@ -31,5 +29,5 @@ public interface DishRepository extends JpaRepository<Dishes, Long> {
     @Query(value = "SELECT  D.id, D.name ,D.description,D.mass,M.category, M.cost FROM DISHES D " +
             "INNER JOIN MENU M ON D.menu_id = M.id WHERE D.id=:id", countQuery = "SELECT COUNT(*) FROM DISHES D " +
             "INNER JOIN MENU M ON D.menu_id = M.id WHERE D.id=:id", nativeQuery = true)
-    List<Map<String, Object>> ById(@Param("id") Long id);
+    Map<String, Object> ById(@Param("id") Long id);
 }

@@ -88,9 +88,15 @@ public class ClientServiceImpl implements ModelMapperService, ClientsService {
     @Override
     public ClientsDto getByLogin(String login) {
         ClientsDto clientsDto = new ClientsDto();
-        map(clientRepository.findByLogin(login),clientsDto);
+        map(clientRepository.findByLogin(login), clientsDto);
         return clientsDto;
     }
 
+    @Override
+    public ClientsDto getIdByLogin(String login) {
+        ClientsDto clientsDto = new ClientsDto();
+        map(clientRepository.getIdByLogin(login), clientsDto);
+        return clientsDto;
+    }
 
 }

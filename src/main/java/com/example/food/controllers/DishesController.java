@@ -42,7 +42,7 @@ public class DishesController {
     }
 
     @GetMapping("/id/{id}")
-    public List getById(@PathVariable("id") Long id){
+    public DishMenuDto getById(@PathVariable("id") Long id){
         return dishesService.ById(id);
     }
 

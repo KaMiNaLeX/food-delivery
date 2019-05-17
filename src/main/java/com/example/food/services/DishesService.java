@@ -16,6 +16,6 @@ public interface DishesService {
 
     DishesDto getDishById(Long id);
 
-    List ById(Long id);
+    DishMenuDto ById(Long id);
 
 }

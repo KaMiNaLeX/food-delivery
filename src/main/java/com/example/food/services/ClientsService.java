@@ -1,6 +1,7 @@
 package com.example.food.services;
 
 import com.example.food.dto.ClientsDto;
+import com.example.food.models.Clients;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface ClientsService {
     List getClientByLogin(String login);
 
     ClientsDto getByLogin(String login);
+
+    ClientsDto getIdByLogin(String login);
 }

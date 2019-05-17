@@ -3,10 +3,8 @@ package com.example.food.controllers;
 import com.example.food.dto.ClientsDto;
 import com.example.food.services.impl.ClientServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.math.BigInteger;
 import java.security.Principal;
 import java.util.ArrayList;
@@ -25,12 +23,10 @@ public class ClientController {
     }
 
     @PostMapping(value = "/create")
-    public ClientsDto createClients(@RequestBody  ClientsDto clientsDto) {
-        try{
+    public ClientsDto createClients(@RequestBody ClientsDto clientsDto) {
+        try {
             return clientService.createClients(clientsDto);
-        }
-        catch(Exception ex)
-        {
+        } catch (Exception ex) {
             return new ClientsDto();
         }
 
@@ -53,6 +49,11 @@ public class ClientController {
             return new ArrayList();
         }
 
+    }
+
+    @GetMapping("/getid/{login}")
+    public ClientsDto getIdByLogin(@PathVariable("login") String login) {
+        return clientService.getIdByLogin(login);
     }
 
 

@@ -1,5 +1,6 @@
 package com.example.food.repositories;
 
+import com.example.food.dto.ClientsDto;
 import com.example.food.models.Clients;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +22,10 @@ public interface ClientRepository extends JpaRepository<Clients, Long> {
     List<Map<String, Object>> getByLogin(@Param("LOGIN") String login);
 
     Clients findByLogin(String login);
+
+    @Query(value = "SELECT C.ID FROM CLIENTS C WHERE C.LOGIN=:LOGIN",
+            countQuery = "SELECT COUNT(*) FROM CLIENTS C WHERE C.LOGIN=:LOGIN", nativeQuery = true)
+    Map<String, Object> getIdByLogin(@Param("LOGIN") String login);
 
 
 }
