@@ -74,9 +74,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService, ModelMapper
 
     @Override
     public List getByClientLogin(String login) {
-        List<ShoppingCartDishDto> shoppingCartDishDtoList = new ArrayList<>();
-        map(shoppingCartRepository.getByClientLogin(login), shoppingCartDishDtoList);
-        return shoppingCartDishDtoList;
+            List<ShoppingCartDishDto> shoppingCartDishDtoList = new ArrayList<>();
+            map(shoppingCartRepository.getByClientLogin(login), shoppingCartDishDtoList);
+            return shoppingCartDishDtoList;
     }
 
     @Override

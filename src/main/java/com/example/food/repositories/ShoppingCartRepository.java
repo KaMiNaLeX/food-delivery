@@ -13,12 +13,14 @@ import java.util.Map;
 
 @Repository
 public interface ShoppingCartRepository extends JpaRepository<ShoppingCart, Long> {
-    @Query(value = "SELECT S.id ,D.name FROM SHOPPING_CART S " +
+    @Query(value = "SELECT S.id,D.description,D.mass,D.name,D.img_source,M.category,M.cost FROM SHOPPING_CART S " +
             "INNER JOIN DISHES D ON D.id = S.dish_id " +
+            "INNER JOIN MENU M ON M.id = D.menu_id " +
             "INNER JOIN CLIENTS C ON C.id = S.client_id " +
             " WHERE C.login =:LOGIN"
             , countQuery = "SELECT COUNT(*) FROM SHOPPING_CART S " +
             "INNER JOIN DISHES D ON D.id = S.dish_id " +
+            "INNER JOIN MENU M ON M.id = D.menu_id " +
             "INNER JOIN CLIENTS C ON C.id = S.client_id " +
             " WHERE C.login =:LOGIN", nativeQuery = true)
     List<Map<String, Object>> getByClientLogin(@Param("LOGIN") String login);

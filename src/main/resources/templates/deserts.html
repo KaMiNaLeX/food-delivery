@@ -60,7 +60,7 @@
 
         <hr class="separator">
 
-        <button type="button" onclick="A()">Register now</button>
+        <button type="button" onclick="registration()">Register now</button>
     </form>
     <a class="close" href="#"></a>
 </div>
@@ -73,14 +73,13 @@
                     <li><a href="#" id="login-btn">login</a></li>
                     <li><a href="#" class="register-btn">register</a></li>
                     <li><a href="/about">about</a></li>
-                    <div sec:authorize="isAuthenticated()">
-                    <li><a href="/orders">orders</a></li>
-                    </div>
+                    <li sec:authorize="isAuthenticated()"><a id="orders" href="/orders">orders</a></li>
+                    <li sec:authorize="isAuthenticated()"><a id="check" href="/check-out">cart</a></li>
                 </ul>
             </nav>
             <div sec:authorize="isAuthenticated()">
-                <label id="L"><h3 class="mar-l-10">I</h3></label>
-                <label id="D"><h3 class="mar-t-10" sec:authentication="name">L</h3></label>
+                <label ><h3 class="mar-l-10" id="I">I</h3></label>
+                <label id="L"><h3 class="mar-t-10" sec:authentication="name">L</h3></label>
             </div>
 
         </div>
@@ -88,14 +87,12 @@
         <nav class="main-menu">
             <ul>
                 <li id="lava-elm"></li>
-                <li >
-                    <a href="/pizza">Pizza</a>
+                <li ><a id="pizza" href="/pizza?userId">Pizza</a>
                 </li>
-                <li >
-                    <a href="/burgers">Burgers</a>
+                <li ><a id="burgers" href="/burgers?userId">Burgers</a>
                 </li>
-                <li><a href="/drinks">Drinks</a></li>
-                <li class="current"><a href="/deserts">Desserts</a></li>
+                <li><a id="drinks" href="/drinks?userId">Drinks</a></li>
+                <li class="current"><a id="deserts" href="/deserts?userId">Desserts</a></li>
                 <li id="lava-elm"></li>
             </ul>
         </nav>
@@ -138,7 +135,7 @@
                                         <p id="description" name="descriptionn">вкусно</p>
                                     </div>
                                     <span class="price" id="cost" name="cost">$18.32</span>
-                                    <a href="/check-out" class="add-to-cart-button">add to cart</a>
+                                    <button type="button" class="add-to-cart-button" onclick="add_to_cart(this)">add to cart</button>
 
                                 </div>
                             </form>

@@ -2,6 +2,7 @@ package com.example.food.services;
 
 import com.example.food.dto.adminDto.DishesDto;
 import com.example.food.dto.clientDto.DishMenuDto;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 

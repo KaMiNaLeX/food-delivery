@@ -5,15 +5,21 @@ import com.example.food.dto.clientDto.DishMenuDto;
 import com.example.food.services.DishesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @RestController
 @RequestMapping("dishes")
 public class DishesController {
+    private static String UPLOADED_FOLDER = "D://DOWNLOAD//Универ//III курс//2 сем//ПСКП//курсач//food(2)//src//main//resources//static//images";
     @Autowired
     private DishesService dishesService;
-
 
     @GetMapping("/")
     public List getAllDishes(@RequestParam("page") int page, @RequestParam("size") int size)
@@ -43,8 +49,26 @@ public class DishesController {
     }
 
     @GetMapping("/id/{id}")
-    public DishMenuDto getById(@PathVariable("id") Long id){
+    public DishMenuDto getById(@PathVariable("id") Long id) {
         return dishesService.ById(id);
     }
+
+    @PostMapping("/upload") // //new annotation since 4.3
+    public String singleFileUpload(@RequestParam("file") MultipartFile file) {
+
+        try {
+
+            // Get the file and save it somewhere
+            byte[] bytes = file.getBytes();
+            Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
+            Files.write(path, bytes);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return "index";
+    }
+
 
 }

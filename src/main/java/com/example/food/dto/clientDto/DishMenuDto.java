@@ -12,7 +12,6 @@ public class DishMenuDto {
     private BigInteger cost;
 
 
-
     public String getImgSource() {
         return imgSource;
     }

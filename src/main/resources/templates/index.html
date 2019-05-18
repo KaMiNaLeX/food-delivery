@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"  xmlns:sec="http://www.thymeleaf.org.thymeleaf-extras-springsecurity5">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org.thymeleaf-extras-springsecurity5">
 <head>
     <!--<meta charset="utf-8">-->
 
@@ -24,10 +24,10 @@
 <!-- LOGIN POP UPS -->
 <div id="popup-overlay"></div>
 
-<div class="popup" id="popup-login" >
+<div class="popup" id="popup-login">
     <h2>Login form</h2>
     <hr class="separator">
-    <form method="post" action="/login" class="form clearfix" >
+    <form method="post" action="/login" class="form clearfix">
         <fieldset>
             <label for="username">Login:</label>
             <input type="text" name="username" id="username" class="input text">
@@ -46,22 +46,22 @@
     <hr class="separator">
     <form class="form clearfix" name="reg">
         <fieldset>
-            <label >Surname:</label>
-            <input type="text" name="surname" id="surname" class="input text" >
-            <label >Phone:</label>
-            <input type="text" name="phone" id="phone" class="input text" >
-            <label >Address:</label>
+            <label>Surname:</label>
+            <input type="text" name="surname" id="surname" class="input text">
+            <label>Phone:</label>
+            <input type="text" name="phone" id="phone" class="input text">
+            <label>Address:</label>
             <input type="text" name="address" id="address" class="input text">
-            <label >Login:</label>
+            <label>Login:</label>
             <input type="text" name="login" id="login" class="input text">
-            <label >Password:</label>
+            <label>Password:</label>
             <input type="password" name="clientPassword" id="clientPassword" class="input text">
 
         </fieldset>
 
         <hr class="separator">
 
-        <button type="button" onclick="registration()">Register now</button>
+        <button type="button" class="button" onclick="registration()">Register now</button>
     </form>
     <a class="close" href="#"></a>
 </div>
@@ -74,29 +74,26 @@
                     <li><a href="#" id="login-btn">login</a></li>
                     <li><a href="#" class="register-btn">register</a></li>
                     <li><a href="/about">about</a></li>
-                    <div sec:authorize="isAuthenticated()">
-                    <li><a href="/orders">orders</a></li>
-                    </div>
+                    <li sec:authorize="isAuthenticated()"><a id="orders" href="/orders">orders</a></li>
+                    <li sec:authorize="isAuthenticated()"><a id="check" href="/check-out">cart</a></li>
                 </ul>
             </nav>
-            <div  sec:authorize="isAuthenticated()">
-            <label ><h3 class="mar-l-10" id="I">id</h3></label>
-            <label  ><h3 class="mar-t-10" sec:authentication="name" id="L"></h3></label>
-        </div>
+            <div sec:authorize="isAuthenticated()">
+                <label><h3 class="mar-l-10" id="I">id</h3></label>
+                <label><h3 class="mar-t-10" sec:authentication="name" id="L"></h3></label>
+            </div>
 
         </div>
         <a href="/index" class="logo"><img src="images/logo.png" alt="your logo"/></a>
-        <nav  class="main-menu">
-            <ul >
+        <nav class="main-menu">
+            <ul>
                 <li id="lava-elm"></li>
-                <li class="current">
-                    <a href="/pizza">Pizza</a>
+                <li><a id="pizza" href="/pizza">Pizza</a>
                 </li>
-                <li >
-                    <a id="burgers" href="/burgers">Burgers</a>
+                <li><a id="burgers" href="/burgers">Burgers</a>
                 </li>
-                <li><a href="/drinks">Drinks</a></li>
-                <li><a href="/deserts">Desserts</a></li>
+                <li><a id="drinks" href="/drinks">Drinks</a></li>
+                <li><a id="deserts" href="/deserts">Desserts</a></li>
             </ul>
         </nav>
         <div class="header-slider-canvas">
@@ -124,18 +121,18 @@
                     <div class="img-holder"><img src="images/meal-1.png" alt=""></div>
                     <div class="desc-holder">
                         <h1><a href="#">Lorem ipsum dolar sit amet consectetur</a></h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac massa mauris, vitae
-                            viverra mauris. Proin libero purus, feugiat rhoncus auctor ut, tempus dictum nunc.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac massa mauris.</p>
                         <span class="price">$15.45</span>
-                        <button class="button" type="button">add to cart</button>
+                        <button class="add-to-cart-button" onclick="add_to_cart()" type="button" name="add">add to
+                            cart
+                        </button>
                     </div>
                 </li>
                 <li class="meal">
                     <div class="img-holder"><img src="images/meal-2.png" alt=""></div>
                     <div class="desc-holder">
                         <h1><a href="#">Lorem ipsum dolar sit amet consectetur</a></h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac massa mauris, vitae
-                            viverra mauris. Proin libero purus, feugiat rhoncus auctor ut, tempus dictum nunc.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac massa mauris.</p>
                         <span class="price">$15.45</span>
                         <a href="/check-out" class="add-to-cart-button">add to cart</a>
                     </div>
@@ -150,66 +147,41 @@
                         <a href="/check-out" class="add-to-cart-button">add to cart</a>
                     </div>
                 </li>
-                <li class="meal">
-                    <div class="img-holder"><img src="images/meal-1.png" alt=""></div>
-                    <div class="desc-holder">
-                        <h1><a href="#">Lorem ipsum dolar sit amet consectetur</a></h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac massa mauris, vitae
-                            viverra mauris. Proin libero purus, feugiat rhoncus auctor ut, tempus dictum nunc.</p>
-                        <span class="price">$15.45</span>
-                        <a href="/check-out" class="add-to-cart-button">add to cart</a>
-                    </div>
-                </li>
-                <li class="meal">
-                    <div class="img-holder"><img src="images/meal-2.png" alt=""></div>
-                    <div class="desc-holder">
-                        <h1><a href="#">Lorem ipsum dolar sit amet consectetur</a></h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac massa mauris, vitae
-                            viverra mauris. Proin libero purus, feugiat rhoncus auctor ut, tempus dictum nunc.</p>
-                        <span class="price">$15.45</span>
-                        <a href="/check-out" class="add-to-cart-button">add to cart</a>
-                    </div>
-                </li>
-                <li class="meal">
-                    <div class="img-holder"><img src="images/meal-3.png" alt=""></div>
-                    <div class="desc-holder">
-                        <h1><a href="#">Lorem ipsum dolar sit amet consectetur</a></h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac massa mauris, vitae
-                            viverra mauris. Proin libero purus, feugiat rhoncus auctor ut, tempus dictum nunc.</p>
-                        <span class="price">$15.45</span>
-                        <a href="/check-out" class="add-to-cart-button">add to cart</a>
-                    </div>
-                </li>
+
             </ul>
         </div>
         <h3 class="title-separator"><span class="title">Featured meals</span><span class="sep"></span></h3>
 
-
-        <div id="featured-meals" >
+        <div id="featured-meals">
             <ul>
                 <li class="meal" id="meal">
+
                     <div class="img-holder"><img name="img" src="images/meal-5.jpg" alt=""></div>
-                    <h1><a href="#" ><label name="name"></label></a></h1>
+                    <h1><a href="#"><label name="name"></label></a></h1>
+                    <div class="date_categories">
+                        ID: <a href="#" name="">
+                        <label name="id" id="id">1</label></a>
+                    </div>
                     <p name="descriptionn">Lorem ipsum dolor sit amet.</p>
                     <span name="cost" class="price">$15.45</span>
-                    <a href="/check-out" class="add-to-cart-button">add to cart</a>
+                    <button class="add-to-cart-button" onclick="add_to_cart()" type="button" name="add">add to cart
+                    </button>
                 </li>
                 <!--<li class="meal">-->
-                    <!--<div class="img-holder"><img id="img2" src="images/meal-5.jpg" alt=""></div>-->
-                    <!--<h1><a href="#" name="name2">Lorem ipsum</a></h1>-->
-                    <!--<p name="description2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>-->
-                    <!--<span class="price" name="cost2">$15.45</span>-->
-                    <!--<a href="/check-out" class="add-to-cart-button">add to cart</a>-->
-                <!--</li>-->
-                <!--<li class="meal">-->
-                    <!--<div class="img-holder"><img name="img3" src="images/meal-6.jpg" alt=""></div>-->
-                    <!--<h1><a href="#" name="name3">Lorem ipsum</a></h1>-->
-                    <!--<p name="description3">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
-                    <!--<span class="price" name="name3">$15.45</span>-->
-                    <!--<a href="/check-out" class="add-to-cart-button">add to cart</a>-->
+                <!--<div class="img-holder"><img id="img2" src="images/meal-5.jpg" alt=""></div>-->
+                <!--<h1><a href="#" name="name2">Lorem ipsum</a></h1>-->
+                <!--<p name="description2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>-->
+                <!--<span class="price" name="cost2">$15.45</span>-->
+                <!--<a href="/check-out" class="add-to-cart-button">add to cart</a>-->
                 <!--</li>-->
             </ul>
         </div>
+        <!--<h1>Spring Boot file upload example</h1>-->
+
+        <!--<form method="POST" action="/dishes/upload" enctype="multipart/form-data">-->
+        <!--<input type="file" name="file" /><br/><br/>-->
+        <!--<input type="submit" value="Submit" />-->
+        <!--</form>-->
 
         <div class="cart-box">
             <div class="top">Cart</div>
