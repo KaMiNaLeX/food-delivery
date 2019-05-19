@@ -133,13 +133,13 @@
                                     </div>
                                 </div>
                                 <div class="cell quantity">
-                                    <input type="text" name="count" onkeypress="item_total(this)" value="1">
+                                    <input type="text" id="count" onchange="item_total(this)" value="1">
                                 </div>
                                 <div class="cell item-price">
-                                    <input type="text" name="cost" value="1" readonly>
+                                    <input type="text" id="itemcost" name="cost" value="2" readonly>
                                 </div>
                                 <div class="cell item-total">
-                                    <input type="text" name="totalcost" value="1" readonly>
+                                    <input type="text" name="totalcost" id="totalcost" value="1" readonly>
                                 </div>
                             </div>
                             <button name="remove" onclick="deleteShoppingCartDish(this)" type="button"><a
@@ -185,59 +185,24 @@
                 <div class="totals">
                     <ul>
                         <li class="total">Total:
-                            <mark name="total">$54.96</mark>
+                            <mark id="total">$54.96</mark>
                         </li>
                     </ul>
                 </div>
                 <div class="buttons">
-                    <a class="button" href="#">Continue shopping</a>
-                    <a class="button" href="#">Empty cart</a>
+                   <a class="button" href="/pizza">Continue shopping</a>
+                    <button class="button" name="delete" type="button" onclick="clearShoppingCart()">Empty cart</button>
                 </div>
             </div>
 
             <h2 class="heading">Checkout</h2>
 
             <div class="checkout">
-
-                <div id="payment-methods">
-                    <span class="label">Payment Method:</span>
-                    <div class="fatty-belt">
-                        <ul>
-                            <li>
-                                <div class="logo"><img src="images/payment-option.jpg" alt=""></div>
-                                <div class="form-controls radio"><input type="radio" name="payment_option" value="1"
-                                                                        checked="checked"></div>
-                            </li>
-                            <li>
-                                <div class="logo"><img src="images/payment-option.jpg" alt=""></div>
-                                <div class="form-controls radio"><input type="radio" name="payment_option" value="1">
-                                </div>
-                            </li>
-                            <li>
-                                <div class="logo"><img src="images/payment-option.jpg" alt=""></div>
-                                <div class="form-controls radio"><input type="radio" name="payment_option" value="1">
-                                </div>
-                            </li>
-                            <li>
-                                <div class="logo"><img src="images/payment-option.jpg" alt=""></div>
-                                <div class="form-controls radio"><input type="radio" name="payment_option" value="1">
-                                </div>
-                            </li>
-                            <li>
-                                <div class="logo"><img src="images/payment-option.jpg" alt=""></div>
-                                <div class="form-controls radio"><input type="radio" name="payment_option" value="1">
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-
                 <div class="discount">
                     <label for="checkout-discount-code">Enter your phone:</label>
                     <input type="text" id="checkout-discount-code">
                 </div>
-                <a class="button" href="#">Checkout</a>
+                <button type="button" onclick="" class="button">Checkout</button>
             </div>
         </div>
         <div class="right-content">

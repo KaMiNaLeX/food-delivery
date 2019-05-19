@@ -8,7 +8,16 @@ public class OrderMenuDto {
     private BigInteger id;
     private BigInteger sum;
     private Timestamp timeOrder;
+    private String imgSource;
     private List<OrderDishDto> orderDishDtoList;
+
+    public String getImgSource() {
+        return imgSource;
+    }
+
+    public void setImgSource(String imgSource) {
+        this.imgSource = imgSource;
+    }
 
     public List<OrderDishDto> getOrderDishDtoList() {
         return orderDishDtoList;

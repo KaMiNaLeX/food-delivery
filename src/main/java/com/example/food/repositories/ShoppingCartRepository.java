@@ -28,4 +28,5 @@ public interface ShoppingCartRepository extends JpaRepository<ShoppingCart, Long
     @Query(value = "SELECT * FROM shopping_cart ",
             countQuery = "SELECT COUNT(*) FROM shopping_cart ", nativeQuery = true)
     Page<Map<String, Object>> findAllShoppingCart (Pageable pageable);
+
 }

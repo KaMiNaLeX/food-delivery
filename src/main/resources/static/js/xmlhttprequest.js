@@ -61,6 +61,7 @@ function getIdcb() {
             document.getElementById("drinks").href = "/drinks?userId=" + document.getElementById("I").textContent;
             document.getElementById("deserts").href = "/deserts?userId=" + document.getElementById("I").textContent;
             document.getElementById("check").href = "/check-out?userId=" + document.getElementById("I").textContent;
+            document.getElementById("orders").href = "/orders?userId=" + document.getElementById("I").textContent;
         }
     }
 }
@@ -118,8 +119,7 @@ function get(url, cb) {
     xhr.send();
 }
 
-function delet(url,cb)
-{
+function delet(url, cb) {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = cb;
     xhr.open("DELETE", url, true);
@@ -362,25 +362,33 @@ function checkcb() {
 
         var div = document.getElementById('dishes');
         var i = 0;
+        var total = 0;
         for (i; i < col; i++) {
 
             var div2 = div.cloneNode(true);
             div2.id = "dishId" + shoppingCartDto[i].id;
-            div2.childNodes[2].nextSibling.childNodes[2].nextSibling.childNodes[1].name = "count" + shoppingCartDto[i].id;
-            div2.childNodes[2].nextSibling.childNodes[5].nextSibling.nextSibling.childNodes[1].name = "totalcost" + shoppingCartDto[i].id;
-            console.log(div2.childNodes[2].nextSibling.childNodes[5].nextSibling.nextSibling.childNodes[1]);
-            console.log(div2.childNodes[2].nextSibling.childNodes[2].nextSibling.childNodes[1]);
+            div2.childNodes[2].nextSibling.childNodes[2].nextSibling.childNodes[1].id = "count" + shoppingCartDto[i].id;
+            div2.childNodes[2].nextSibling.childNodes[5].nextSibling.nextSibling.childNodes[1].id = "totalcost" + shoppingCartDto[i].id;
+            div2.childNodes[2].nextSibling.childNodes[3].nextSibling.nextSibling.childNodes[1].id = "itemcost" + shoppingCartDto[i].id;
+
+
             div.parentNode.insertBefore(div2, div);
             document.getElementsByName("id")[i].textContent = shoppingCartDto[i].id;
             document.getElementsByName("name")[i].textContent = shoppingCartDto[i].name;
             document.getElementsByName("category")[i].textContent = shoppingCartDto[i].category;
             document.getElementsByName("mass")[i].textContent = shoppingCartDto[i].mass;
             document.getElementsByName("cost")[i].value = shoppingCartDto[i].cost + "$";
+            document.getElementsByName("totalcost")[i].value = shoppingCartDto[i].cost + "$";
             document.getElementsByName("descriptionn")[i].textContent = shoppingCartDto[i].description;
             document.getElementsByName("img")[i].src = "http://localhost:8080" + shoppingCartDto[i].img_source;
+
+
+            total = total + parseInt(document.getElementsByName("totalcost")[i].value.split("$").join("").toString());
+
         }
         div.hidden = true;
-
+        document.getElementById("total").textContent = "$" + total;
+        //document.getElementById("total").textContent =
     }
 }
 
@@ -394,12 +402,108 @@ function deleteShoppingCartDish(e) {
         alert("Необходимо авторизироваться!");
         return false;
     } else {
-        delet("/shoppingCart/" + newShoppingCartId,null);
+        delet("/shoppingCart/" + newShoppingCartId, null);
         window.location.reload();
     }
 }
 
 function item_total(e) {
-    console.log(e.name);
+
+    var countId = e.id;
+    console.log(countId);
+    console.log(document.getElementById(countId));
+
+
+    var totalcostId = countId.split("count").join("totalcost");
+    var itemcostId = countId.split("count").join("itemcost");
+    document.getElementById(totalcostId).value =
+        parseInt(document.getElementById(countId).value.toString()) *
+        parseInt(document.getElementById(itemcostId).value.toString()) + "$";
+
+    get("/shoppingCart/" + document.getElementById("L").textContent, cb);
+
+    function cb() {
+        if (this.readyState == 4 && this.status == 200) {
+            var total = 0;
+            var i = 0;
+            let shoppingCartDto = JSON.parse(this.responseText);
+            var col = shoppingCartDto.length;
+            for (i; i < col; i++) {
+                total = total + parseInt(document.getElementsByName("totalcost")[i].value.split("$").join("").toString());
+            }
+            document.getElementById("total").textContent = "$" + total;
+        }
+    }
+
+
 }
 
+function clearShoppingCart() {
+
+    get("/shoppingCart/" + document.getElementById("L").textContent, cb);
+
+    function cb() {
+        if (this.readyState == 4 && this.status == 200) {
+
+            var i = 0;
+            let shoppingCartDto = JSON.parse(this.responseText);
+            var col = shoppingCartDto.length;
+            for (i; i < col; i++) {
+
+                delet("/shoppingCart/" + document.getElementsByName("id")[i].textContent, null);
+
+            }
+            window.location.reload();
+        }
+    }
+
+}
+
+function orders() {
+    var dishList =[];
+    dishList.push(document.getElementsByName("count17").textContent);
+    dishList[0];
+}
+//////////////orders.html
+function orders_load(){
+    document.getElementById("I").textContent = getRequestParam("userId");
+    get("/orders/{login}/" + document.getElementById("L").textContent, orderscb);
+}
+function orderscb() {
+    if (this.readyState == 4 && this.status == 200) {
+        console.log(this.responseText);
+        let ordersDto = JSON.parse(this.responseText);
+
+        var col = ordersDto.length;
+
+        var div = document.getElementById('dishes');
+        var i = 0;
+        var total = 0;
+        for (i; i < col; i++) {
+
+            var div2 = div.cloneNode(true);
+            div2.id = "dishId" + shoppingCartDto[i].id;
+            div2.childNodes[2].nextSibling.childNodes[2].nextSibling.childNodes[1].id = "count" + shoppingCartDto[i].id;
+            div2.childNodes[2].nextSibling.childNodes[5].nextSibling.nextSibling.childNodes[1].id = "totalcost" + shoppingCartDto[i].id;
+            div2.childNodes[2].nextSibling.childNodes[3].nextSibling.nextSibling.childNodes[1].id = "itemcost" + shoppingCartDto[i].id;
+
+
+            div.parentNode.insertBefore(div2, div);
+            document.getElementsByName("id")[i].textContent = shoppingCartDto[i].id;
+            document.getElementsByName("name")[i].textContent = shoppingCartDto[i].name;
+            document.getElementsByName("category")[i].textContent = shoppingCartDto[i].category;
+            document.getElementsByName("mass")[i].textContent = shoppingCartDto[i].mass;
+            document.getElementsByName("cost")[i].value = shoppingCartDto[i].cost + "$";
+            document.getElementsByName("totalcost")[i].value = shoppingCartDto[i].cost + "$";
+            document.getElementsByName("descriptionn")[i].textContent = shoppingCartDto[i].description;
+            document.getElementsByName("img")[i].src = "http://localhost:8080" + shoppingCartDto[i].img_source;
+
+
+            total = total + parseInt(document.getElementsByName("totalcost")[i].value.split("$").join("").toString());
+
+        }
+        div.hidden = true;
+        document.getElementById("total").textContent = "$" + total;
+        //document.getElementById("total").textContent =
+    }
+}

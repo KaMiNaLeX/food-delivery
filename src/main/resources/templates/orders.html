@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org.thymeleaf-extras-springsecurity5">
 <head>
     <!--<meta charset="utf-8">-->
 
@@ -15,52 +15,56 @@
 
     <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
     <script src="js/libs/modernizr-1.7.min.js"></script>
+    <script src="js/xmlhttprequest.js"></script>
 </head>
 
-<body>
+<body onload="orders_load()">
 
 <!-- LOGIN POP UPS -->
 <div id="popup-overlay"></div>
+
 <div class="popup" id="popup-login">
     <h2>Login form</h2>
     <hr class="separator">
-    <form method="post" action="" class="form clearfix">
+    <form method="post" action="/login" class="form clearfix">
         <fieldset>
-            <label for="login-username">Login:</label>
-            <input type="text" name="" id="login-username" class="input text">
-            <label for="login-password">Password:</label>
-            <input type="password" name="" id="login-password" class="input text">
+            <label for="username">Login:</label>
+            <input type="text" name="username" id="username" class="input text">
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" class="input text">
         </fieldset>
+
+        <hr class="separator">
+        <button type="submit" class="button submit">Login</button>
     </form>
-    <hr class="separator">
-    <button class="button submit">Login</button>
     <div class="links"><a href="#">Forgotten password </a> | <a href="#" class="register-btn"> New account</a></div>
     <a class="close" href="#"></a>
 </div>
 <div class="popup" id="popup-register">
     <h2>Registration form</h2>
     <hr class="separator">
-    <form method="post" action="" class="form clearfix">
+    <form class="form clearfix" name="reg">
         <fieldset>
-            <label for="login-surname">Surname:</label>
-            <input type="text" name="" id="login-surname" class="input text">
-            <label for="login-phone">Phone:</label>
-            <input type="text" name="" id="login-phone" class="input text error" value="Error">
-            <label for="login-address">Address:</label>
-            <input type="text" name="" id="login-address" class="input text">
-            <label for="login-login">Login:</label>
-            <input type="text" name="" id="login-login" class="input text">
-            <label for="login-password">Password:</label>
-            <input type="password" name="" id="login-password" class="input text">
+            <label>Surname:</label>
+            <input type="text" name="surname" id="surname" class="input text">
+            <label>Phone:</label>
+            <input type="text" name="phone" id="phone" class="input text">
+            <label>Address:</label>
+            <input type="text" name="address" id="address" class="input text">
+            <label>Login:</label>
+            <input type="text" name="login" id="login" class="input text">
+            <label>Password:</label>
+            <input type="password" name="clientPassword" id="clientPassword" class="input text">
 
         </fieldset>
 
         <hr class="separator">
 
-        <button class="button submit">Register now</button>
+        <button type="button" class="button" onclick="registration()">Register now</button>
     </form>
     <a class="close" href="#"></a>
 </div>
+
 <!-- END LOGIN POP UPS -->
 <div class='wrapper'>
     <header>
@@ -70,28 +74,25 @@
                     <li><a href="#" id="login-btn">login</a></li>
                     <li><a href="#" class="register-btn">register</a></li>
                     <li><a href="/about">about</a></li>
-                    <li><a href="/orders">orders</a></li>
-                    <li><a href="#" id="login-btn"><p style="text-indent: 500px">LOGIN</p></a></li>
-
+                    <li sec:authorize="isAuthenticated()"><a id="cart" href="/check-out">cart</a></li>
                 </ul>
             </nav>
-
-
+            <div sec:authorize="isAuthenticated()">
+                <label><h3 class="mar-l-10" id="I">id</h3></label>
+                <label><h3 class="mar-t-10" sec:authentication="name" id="L"></h3></label>
+            </div>
 
         </div>
-        <a href="/index" class="logo"><img src="images/logo.png" alt="your logo" /></a>
+        <a href="/index" class="logo"><img src="images/logo.png" alt="your logo"/></a>
         <nav class="main-menu">
             <ul>
                 <li id="lava-elm"></li>
-                <li class="current">
-                    <a href="/listing">Pizza</a>
+                <li><a id="pizza" href="/pizza">Pizza</a>
                 </li>
-                <li>
-                    <a href="/listing">Burgers</a>
+                <li><a id="burgers" href="/burgers">Burgers</a>
                 </li>
-                <li><a href="/listing">Drinks</a></li>
-                <li><a href="/listing">Desserts</a></li>
-                <li id="lava-elm"></li>
+                <li><a id="drinks" href="/drinks">Drinks</a></li>
+                <li><a id="deserts" href="/deserts">Desserts</a></li>
             </ul>
         </nav>
     </header>

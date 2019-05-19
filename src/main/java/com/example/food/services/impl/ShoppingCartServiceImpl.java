@@ -1,10 +1,8 @@
 package com.example.food.services.impl;
 
-import com.example.food.dto.adminDto.DishesDto;
 import com.example.food.dto.adminDto.ShoppingCartDto;
 import com.example.food.dto.clientDto.ShoppingCartDishDto;
 import com.example.food.models.ShoppingCart;
-import com.example.food.repositories.ClientRepository;
 import com.example.food.repositories.ShoppingCartRepository;
 import com.example.food.services.ModelMapperService;
 import com.example.food.services.ShoppingCartService;
@@ -38,8 +36,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService, ModelMapper
     }
 
     @Override
-    public List findAllShoppingCart(int page, int size) throws IllegalAccessException
-    {
+    public List findAllShoppingCart(int page, int size) throws IllegalAccessException {
         Pageable pageable = PageRequest.of(page, size);
         Page<Map<String, Object>> pageDishes = shoppingCartRepository.findAllShoppingCart(pageable);
         List<Map<String, Object>> list = pageDishes.getContent();
@@ -74,9 +71,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService, ModelMapper
 
     @Override
     public List getByClientLogin(String login) {
-            List<ShoppingCartDishDto> shoppingCartDishDtoList = new ArrayList<>();
-            map(shoppingCartRepository.getByClientLogin(login), shoppingCartDishDtoList);
-            return shoppingCartDishDtoList;
+        List<ShoppingCartDishDto> shoppingCartDishDtoList = new ArrayList<>();
+        map(shoppingCartRepository.getByClientLogin(login), shoppingCartDishDtoList);
+        return shoppingCartDishDtoList;
     }
 
     @Override
@@ -84,6 +81,5 @@ public class ShoppingCartServiceImpl implements ShoppingCartService, ModelMapper
         shoppingCartRepository.deleteById(id);
 
     }
-
 
 }

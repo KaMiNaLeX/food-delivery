@@ -23,7 +23,7 @@ public interface OrderRepository extends JpaRepository<Orders, Long> {
     Page<Map<String, Object>> findAllOrders(Pageable pageable);
 
     @Query(value = "SELECT O.ID,O.SUM,O.TIME_ORDER, " +
-    "D.NAME,D.DESCRIPTION,M.CATEGORY FROM CLIENTS C " +
+    "D.NAME,D.DESCRIPTION,D.img_source, M.CATEGORY FROM CLIENTS C " +
     "INNER JOIN ORDERS O ON C.ID = O.CLIENT_ID " +
     "INNER JOIN CLIENTS_DISHES CD ON CD.ORDER_ID = O.ID " +
     "INNER JOIN DISHES D ON D.ID = CD.DISH_ID " +
