@@ -54,4 +54,9 @@ public class ViewController {
     public String pizza() {
         return "pizza";
     }
+
+    @RequestMapping(value = "/ordersDishes")
+    public String ordersDishes() {
+        return "ordersDishes";
+    }
 }

@@ -2,6 +2,7 @@ package com.example.food.dto.clientDto;
 
 import java.math.BigInteger;
 
+
 public class DishMenuDto {
     private BigInteger id;
     private String description;

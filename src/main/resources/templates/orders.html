@@ -73,7 +73,6 @@
                 <ul>
                     <li><a href="#" id="login-btn">login</a></li>
                     <li><a href="#" class="register-btn">register</a></li>
-                    <li><a href="/about">about</a></li>
                     <li sec:authorize="isAuthenticated()"><a id="cart" href="/check-out">cart</a></li>
                 </ul>
             </nav>
@@ -108,114 +107,73 @@
             <div class="shopping-cart">
                 <div class="list">
                     <ul>
-                        <li>
+                        <li id="dishes">
                             <div class="head">
-                                <div class="cell item">
-                                    Item1
-
-                                <div class="cell item">Item2 </div>
-                                </div>
-                                <div class="cell quantity">Name</div>
-                                <div class="cell item-price">Description</div>
-                                <div class="cell item-total">Category</div>
-
+                                <div class="cell item-total">Order Id</div>
+                                <div class="cell item-total">Total Price</div>
+                                <div class="cell item-price">Time order</div>
                             </div>
-                            <div class="body">
-                                <div class="cell item">
-                                    <div class="image">
-                                        <img src="images/meal-7.jpg" alt="">
-                                    </div>
+                            <div class="body2">
 
-                                </div>
-                                <div class="cell quantity">
-                                    <div class="descr">
-                                        <h3>Spinach potato casserole</h3>
-                                    </div>
-                                </div>
-                                <div class="cell item-price">
-                                    <div class="descr">
-                                        <p>consectetur adipiscing elit. Suspendiet condiment augue.</p>
-                                    </div>
+                                <div class="cell item-total">
+                                    <input type="text" name="id" value="1" readonly>
                                 </div>
                                 <div class="cell item-total">
-                                    <div class="descr">
-                                        <h3>Burger</h3>
-                                    </div>
-                                </div>
-                            </div>
-                            <a class="remove" href="#">X</a>
-                        </li>
-
-                        <li>
-                            <div class="head">
-                                <div class="cell item">Item</div>
-                                <div class="cell quantity">Quantity</div>
-                                <div class="cell item-price">Item Price</div>
-                                <div class="cell item-total">Item Total</div>
-                            </div>
-                            <div class="body">
-                                <div class="cell item">
-                                    <div class="image">
-                                        <img src="images/meal-7.jpg" alt="">
-                                    </div>
-                                    <div class="descr">
-                                        <h3>Spinach potato casserole</h3>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendiet condiment augue.</p>
-                                    </div>
-                                </div>
-                                <div class="cell quantity">
-                                    <input type="text" name="" value="1">
+                                    <input type="text" id="sum" name="sum" value="1" readonly>
                                 </div>
                                 <div class="cell item-price">
-                                    $18.32
-                                </div>
-                                <div class="cell item-total">
-                                    $18.32
-                                </div>
-                            </div>
-                            <a class="remove" href="#">X</a>
-                        </li>
-
-                        <li>
-                            <div class="head">
-                                <div class="cell item">Item</div>
-                                <div class="cell quantity">Quantity</div>
-                                <div class="cell item-price">Item Price</div>
-                                <div class="cell item-total">Item Total</div>
-                            </div>
-                            <div class="body">
-                                <div class="cell item">
-                                    <div class="image">
-                                        <img src="images/meal-7.jpg" alt="">
-                                    </div>
-                                    <div class="descr">
-                                        <h3>Spinach potato casserole</h3>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendiet condiment augue.</p>
-                                    </div>
+                                    <input type="text" id="timeorder" name="timeorder" value="2" readonly>
                                 </div>
                                 <div class="cell quantity">
-                                    <input type="text" name="" value="1">
-                                </div>
-                                <div class="cell item-price">
-                                    $18.32
-                                </div>
-                                <div class="cell item-total">
-                                    $18.32
+                                   <button class="button" type="button" id="orderid" onclick="orderid(this)"> Подробнее</button>
+
                                 </div>
                             </div>
-                            <a class="remove" href="#">X</a>
+
                         </li>
+
+                        <!--<li>-->
+                        <!--<div class="head">-->
+                        <!--<div class="cell item">Item</div>-->
+                        <!--<div class="cell quantity">Quantity</div>-->
+                        <!--<div class="cell item-price">Item Price</div>-->
+                        <!--<div class="cell item-total">Item Total</div>-->
+                        <!--</div>-->
+                        <!--<div class="body">-->
+                        <!--<div class="cell item">-->
+                        <!--<div class="image">-->
+                        <!--<img src="images/meal-7.jpg" alt="">-->
+                        <!--</div>-->
+                        <!--<div class="descr">-->
+                        <!--<h3>Spinach potato casserole</h3>-->
+                        <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendiet condiment-->
+                        <!--augue.</p>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="cell quantity">-->
+                        <!--<input type="text" name="" value="1">-->
+                        <!--</div>-->
+                        <!--<div class="cell item-price">-->
+                        <!--$18.32-->
+                        <!--</div>-->
+                        <!--<div class="cell item-total">-->
+                        <!--$18.32-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--<a class="remove" href="#">X</a>-->
+                        <!--</li>-->
                     </ul>
                 </div>
                 <div class="totals">
                     <ul>
-                        <li class="total">Total: <mark>$54.96</mark></li>
+                        <li class="total">Total:
+                            <mark id="total"> $54.96</mark>
+                        </li>
                     </ul>
                 </div>
                 <div class="buttons">
-                    <a class="button" href="#">Continue shopping</a>
-                    <a class="button" href="#">Empty cart</a>
-                </div>
+                <a class="button" href="/pizza">Continue shopping</a>
+            </div>
             </div>
 
 
@@ -229,41 +187,8 @@
             </div>
 
 
-
             <div class="separator dark box-and-meals"></div>
 
-            <div class="featured-meals">
-
-                <h2 class="heading">Featured meals</h2>
-
-                <div class="prev-next-buttons">
-                    <a href="#" class="prev"></a>
-                    <a href="#" class="next"></a>
-                </div>
-
-                <div class="block meal">
-                    <ul>
-                        <li>
-                            <div class="image">
-                                <img src="images/meal-8.jpg" alt="">
-                            </div>
-                            <h1>Skewers</h1>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
-                            <span class="price">$18.32</span>
-                            <a href="/check-out" class="add-to-cart-button">add to cart</a>
-                        </li>
-                        <li>
-                            <div class="image">
-                                <img src="images/meal-8.jpg" alt="">
-                            </div>
-                            <h1>Skewers</h1>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
-                            <span class="price">$18.32</span>
-                            <a href="/check-out" class="add-to-cart-button">add to cart</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
         </div>
     </div>
 </div>

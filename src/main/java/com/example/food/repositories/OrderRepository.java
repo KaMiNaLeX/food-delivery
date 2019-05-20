@@ -13,7 +13,7 @@ import java.util.Map;
 
 @Repository
 public interface OrderRepository extends JpaRepository<Orders, Long> {
-    @Query(value = "SELECT O.ID ,C.LOGIN,C.PHONE,C.ADDRESS,O.SUM FROM CLIENTS C " +
+    @Query(value = "SELECT O.id ,O.time_order, C.login,C.PHONE,C.ADDRESS,O.sum FROM CLIENTS C " +
             "INNER JOIN ORDERS O  ON O.CLIENT_ID = C.ID WHERE C.LOGIN=:LOGIN", countQuery = "SELECT COUNT(*) FROM CLIENTS C " +
             "INNER JOIN ORDERS O ON O.CLIENT_ID = C.ID WHERE C.LOGIN=:LOGIN", nativeQuery = true)
     List<Map<String, Object>> getByLogin(@Param("LOGIN") String login);
@@ -36,7 +36,7 @@ public interface OrderRepository extends JpaRepository<Orders, Long> {
             "WHERE C.LOGIN=:LOGIN ", nativeQuery = true)
     List<Map<String, Object>> getDishesByLogin(@Param("LOGIN") String login);
 
-    @Query(value = "SELECT D.NAME,D.DESCRIPTION,D.MASS,M.CATEGORY,O.id,O.client_id,O.sum,O.time_order" +
+    @Query(value = "SELECT D.name,D.description,D.mass,D.img_source,M.category,M.cost,O.id,O.client_id,O.sum,O.time_order" +
             " FROM CLIENTS C " +
             "INNER JOIN ORDERS O ON C.ID = O.CLIENT_ID " +
             "INNER JOIN CLIENTS_DISHES CD ON CD.ORDER_ID = O.ID " +

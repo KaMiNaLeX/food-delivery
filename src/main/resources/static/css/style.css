@@ -1280,6 +1280,7 @@ input, textarea {box-shadow:inset 1px 1px 10px rgba(0, 0, 0, 0.3); padding:5px 1
 	clear: both;
 	padding: 14px 0 0;
 	overflow: hidden;
+
 }
 .shopping-cart .cell {float: left}
 .shopping-cart .body .cell {
@@ -1287,6 +1288,7 @@ input, textarea {box-shadow:inset 1px 1px 10px rgba(0, 0, 0, 0.3); padding:5px 1
 	height: 300px;
 
 }
+
 .shopping-cart .item {width: 200px}
 .shopping-cart .quantity {
 	width: 90px;
@@ -1673,3 +1675,38 @@ input, textarea {box-shadow:inset 1px 1px 10px rgba(0, 0, 0, 0.3); padding:5px 1
 #popup-register .checks {width: 305px; float: right; color: #5b3922; font-size: 13px; margin-bottom: 10px;}
 #popup-register .check-row {overflow: hidden; padding: 0 0 10px}
 #popup-register .checkbox {margin-right: 4px}
+.shopping-cart .body2 {
+    clear: both;
+    padding: 14px 0 0;
+    overflow: hidden;
+height: 90px;
+}
+.shopping-cart .cell {float: left}
+.shopping-cart .body2 .cell {
+    border-right: 1px #f2deba solid;
+    height: 200px;
+
+}
+
+.shopping-cart .body2 .quantity {
+    padding:0px 0 0;
+    height: 100px;
+    width: 135px;
+}
+.shopping-cart .item-total input {
+    background: transparent;
+    font-weight: bold;
+    width: 100px;
+    text-align: center;
+}
+.shopping-cart .item-price input {
+    background: transparent;
+    font-weight: bold;
+    width: 100px;
+    text-align: center;
+}
+
+
+
+.shopping-cart .body2 .item-total {border-right: none}
+.shopping-cart .body2.item-total, .shopping-cart .body .item-price {color: #724e36;padding:50px 0 0; height: 70px; font-size: 15px;height: 250px;}
