@@ -58,7 +58,7 @@ public class ClientServiceImpl implements ModelMapperService, ClientsService {
 
     @Override
     public ClientsDto createClients(ClientsDto clientsDto) {
-        clientsDto.setUserRole(UserRole.ADMIN_ROLE);
+        clientsDto.setUserRole(UserRole.SIMPLE_USER_ROLE);
         clientsDto.setPassword(passwordEncoder.encode(clientsDto.getPassword()));
         Clients clients = new Clients();
         map(clientsDto, clients);

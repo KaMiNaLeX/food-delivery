@@ -479,7 +479,7 @@ function orders() {
     let time_order = dt.toIsoString();
     OrdersDto.clientId = clientId;
     OrdersDto.sum = sum;
-    OrdersDto.timeorder = time_order;
+    OrdersDto.timeOrder = time_order;
     var ArrayInput = document.getElementsByName('name');
     var col = parseInt(ArrayInput.length) - 1;
     console.log(col);
