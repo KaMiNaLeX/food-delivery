@@ -552,6 +552,7 @@ function orderdishescb() {
     if (this.readyState == 4 && this.status == 200) {
 
         let ordersDto = JSON.parse(this.responseText);
+        console.log(JSON.parse(this.responseText));
         var col = ordersDto.length;
         var div = document.getElementById('menu');
         var i = 0;
