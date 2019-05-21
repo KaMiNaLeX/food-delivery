@@ -123,6 +123,7 @@ function getIdcb() {
             document.getElementById("deserts").href = "/deserts?userId=" + document.getElementById("I").textContent;
             document.getElementById("check").href = "/check-out?userId=" + document.getElementById("I").textContent;
             document.getElementById("orders").href = "/orders?userId=" + document.getElementById("I").textContent;
+            document.getElementById("check-out").href = "/check-out?userId=" + document.getElementById("I").textContent;
         }
     }
 }
@@ -327,13 +328,15 @@ function check_out_load() {
 
     document.getElementById("I").textContent = getRequestParam("userId");
     get("/shoppingCart/" + document.getElementById("L").textContent, checkcb);
+    document.getElementById("orders").href = "/orders?userId=" + document.getElementById("I").textContent;
 
 }
 
 function checkcb() {
     if (this.readyState == 4 && this.status == 200) {
-        console.log(this.responseText);
+
         let shoppingCartDto = JSON.parse(this.responseText);
+        console.log(shoppingCartDto);
         var col = shoppingCartDto.length;
         var div = document.getElementById('dishes');
         var i = 0;
@@ -348,6 +351,7 @@ function checkcb() {
 
             div.parentNode.insertBefore(div2, div);
             document.getElementsByName("id")[i].textContent = shoppingCartDto[i].id;
+            document.getElementsByName("dishid")[i].textContent = shoppingCartDto[i].dish_id;
             document.getElementsByName("name")[i].textContent = shoppingCartDto[i].name;
             document.getElementsByName("category")[i].textContent = shoppingCartDto[i].category;
             document.getElementsByName("mass")[i].textContent = shoppingCartDto[i].mass;
@@ -355,6 +359,7 @@ function checkcb() {
             document.getElementsByName("totalcost")[i].value = shoppingCartDto[i].cost + "$";
             document.getElementsByName("descriptionn")[i].textContent = shoppingCartDto[i].description;
             document.getElementsByName("img")[i].src = "http://localhost:8080" + shoppingCartDto[i].img_source;
+            document.getElementsByName("menuid")[i].textContent = shoppingCartDto[i].menu_id;
 
             total = total + parseInt(document.getElementsByName("totalcost")[i].value.split("$").join("").toString());
         }
@@ -426,6 +431,7 @@ function clearShoppingCart() {
 function orders_load() {
     document.getElementById("I").textContent = getRequestParam("userId");
     get("orders/login/" + document.getElementById("L").textContent, orderscb);
+    document.getElementById("cart").href = "/check-out?userId=" + document.getElementById("I").textContent;
 }
 
 function orderscb() {
@@ -463,9 +469,54 @@ function orderid(e) {
 }
 
 function orders() {
+
+    var dt = new Date();
+    console.log(dt.toIsoString());
+
+    let OrdersDto = {};
+    let clientId = document.getElementById("I").textContent;
+    let sum = document.getElementById("total").textContent.split("$").join("");
+    let time_order = dt.toIsoString();
+    OrdersDto.clientId = clientId;
+    OrdersDto.sum = sum;
+    OrdersDto.timeorder = time_order;
+    var ArrayInput = document.getElementsByName('name');
+    var col = parseInt(ArrayInput.length) - 1;
+    console.log(col);
+
+    var i = 0;
     var dishList = [];
-    dishList.push(document.getElementsByName("count17").textContent);
-    dishList[0];
+    for (i; i < col; i++) {
+        var dish = {};
+        dish.id = document.getElementsByName("dishid")[i].textContent;
+        dish.description = document.getElementsByName("descriptionn")[i].textContent;
+        dish.mass =  document.getElementsByName("mass")[i].textContent;
+        dish.name = document.getElementsByName("name")[i].textContent;
+        dish.imgSource = document.getElementsByName("img")[i].src.split("http://localhost:8080").join("");
+        dish.menuId = document.getElementsByName("menuid")[i].textContent;
+        dishList.push(dish);
+    }
+    OrdersDto.dishesDtoList = dishList;
+     console.log(dishList[0]);
+     console.log(dishList)
+     console.log(OrdersDto.dishesDtoList);
+
+    post("/orders/create", OrdersDto, ordersCallBack);
+
+}
+
+function ordersCallBack() {
+    if (this.readyState == 4 && this.status == 200) {
+        console.log(this.responseText);
+        let OrdersDto = JSON.parse(this.responseText);
+        if (OrdersDto.id != null) {
+            alert("Заказ успешно оформлен!");
+        } else {
+            alert("Что-то пошло не так!");
+        }
+
+    }
+
 }
 
 ///////////ADD TIME ORDER

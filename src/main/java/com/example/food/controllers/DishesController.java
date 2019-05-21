@@ -17,7 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping("dishes")
 public class DishesController {
-    private static String UPLOADED_FOLDER = "D://DOWNLOAD//Универ//III курс//2 сем//ПСКП//курсач//food(2)//src//main//resources//static//images";
+
     @Autowired
     private DishesService dishesService;
 
@@ -53,22 +53,7 @@ public class DishesController {
         return dishesService.ById(id);
     }
 
-    @PostMapping("/upload") // //new annotation since 4.3
-    public String singleFileUpload(@RequestParam("file") MultipartFile file) {
 
-        try {
-
-            // Get the file and save it somewhere
-            byte[] bytes = file.getBytes();
-            Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
-            Files.write(path, bytes);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return "index";
-    }
 
 
 }

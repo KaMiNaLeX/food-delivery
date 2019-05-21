@@ -85,7 +85,7 @@
         <a href="/index" class="logo"><img src="images/logo.png" alt="your logo"/></a>
         <nav class="main-menu">
             <ul>
-                <li id="lava-elm"></li>
+                <li id="lava-elm1"></li>
                 <li ><a id="pizza" href="/pizza?userId">Pizza</a>
                 </li>
                 <li ><a id="burgers" href="/burgers?userId">Burgers</a>
@@ -162,13 +162,12 @@
                 <span class="pop">0-24h</span>
             </div>
 
-            <div class="cart-box">
+            <div sec:authorize="isAuthenticated()" class="cart-box">
                 <div class="top">Cart</div>
                 <div class="body">
                     <ul>
                         <li class="info">
                             <span class="products"><strong>5</strong> products</span>
-                            <a href="#">View cart</a>
                         </li>
                         <li class="price">
                             <span class="label">Shipping</span>
@@ -179,43 +178,8 @@
                             <span class="value">$0.00</span>
                         </li>
                     </ul>
-                    <a class="submit-button" href="/check-out">Check out</a>
+                    <a class="submit-button" id="check-out" href="/check-out">Check out</a>
                     <div class="graphic"></div>
-                </div>
-            </div>
-
-            <div class="separator dark box-and-meals"></div>
-
-            <div class="featured-meals">
-
-                <h2 class="heading">Featured meals</h2>
-
-                <div class="prev-next-buttons">
-                    <a href="#" class="prev"></a>
-                    <a href="#" class="next"></a>
-                </div>
-
-                <div class="block meal">
-                    <ul>
-                        <li>
-                            <div class="image">
-                                <img src="images/meal-8.jpg" alt="">
-                            </div>
-                            <h1>Skewers</h1>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
-                            <span class="price">$18.32</span>
-                            <a href="/check-out" class="add-to-cart-button">add to cart</a>
-                        </li>
-                        <li>
-                            <div class="image">
-                                <img src="images/meal-8.jpg" alt="">
-                            </div>
-                            <h1>Skewers</h1>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
-                            <span class="price">$18.32</span>
-                            <a href="/check-out" class="add-to-cart-button">add to cart</a>
-                        </li>
-                    </ul>
                 </div>
             </div>
         </div>

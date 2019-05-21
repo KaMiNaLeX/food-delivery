@@ -105,7 +105,7 @@
             <h2 class="heading">Shopping cart</h2>
             <div class="shopping-cart">
                 <div class="list">
-                    <ul>
+                    <ul >
                         <li id="dishes">
                             <div class="head">
                                 <div class="cell item">Item</div>
@@ -123,10 +123,14 @@
                                     <div class="descr">
                                         <h3><label id="name" name="name">Potato</label></a></h3>
                                         <div>
-                                            Categories:
+                                            Category:
                                             <label name="category">Seafood</label></a>
                                             Mass:
                                             <label name="mass">100</label></a>
+                                            MenuId:
+                                            <label name="menuid">1</label>
+                                            DishId:
+                                            <label name="dishid">1</label>
                                         </div>
                                         <p name="descriptionn">вкусно </p>
                                     </div>
@@ -194,14 +198,12 @@
                 </div>
             </div>
 
-            <h2 class="heading">Checkout</h2>
-
             <div class="checkout">
                 <div class="discount">
                     <label for="checkout-discount-code">Enter your phone:</label>
                     <input type="text" id="checkout-discount-code">
                 </div>
-                <button type="button" onclick="" class="button">Checkout</button>
+                <button type="button" onclick="orders()" class="button">Checkout</button>
             </div>
         </div>
         <div class="right-content">
@@ -210,42 +212,6 @@
                 <span class="pop phone">0800/ 567 345</span>
                 <span class="label">Working time:</span>
                 <span class="pop">0-24h</span>
-            </div>
-
-
-            <div class="separator dark box-and-meals"></div>
-
-            <div class="featured-meals">
-
-                <h2 class="heading">Featured meals</h2>
-
-                <div class="prev-next-buttons">
-                    <a href="#" class="prev"></a>
-                    <a href="#" class="next"></a>
-                </div>
-
-                <div class="block meal">
-                    <ul>
-                        <li>
-                            <div class="image">
-                                <img src="images/meal-8.jpg" alt="">
-                            </div>
-                            <h1>Skewers</h1>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
-                            <span class="price">$18.32</span>
-                            <a href="/check-out" class="add-to-cart-button">add to cart</a>
-                        </li>
-                        <li>
-                            <div class="image">
-                                <img src="images/meal-8.jpg" alt="">
-                            </div>
-                            <h1>Skewers</h1>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
-                            <span class="price">$18.32</span>
-                            <a href="/check-out" class="add-to-cart-button">add to cart</a>
-                        </li>
-                    </ul>
-                </div>
             </div>
         </div>
     </div>

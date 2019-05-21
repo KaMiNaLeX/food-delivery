@@ -59,4 +59,9 @@ public class ViewController {
     public String ordersDishes() {
         return "ordersDishes";
     }
+
+    @RequestMapping(value = "/createDish")
+    public String createDish() {
+        return "createDish";
+    }
 }

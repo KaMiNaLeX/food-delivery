@@ -1055,6 +1055,7 @@ ol li {list-style-position: inside}
 
 .content ol li li {padding:0 0 0 20px; list-style-type: lower-alpha}
 input, textarea {box-shadow:inset 1px 1px 10px rgba(0, 0, 0, 0.3); padding:5px 10px; border-radius: 10px; border: none; background-color: #cfb27e}
+
 .button {
 	cursor: pointer;
   display: block;

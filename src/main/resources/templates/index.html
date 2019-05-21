@@ -1,17 +1,14 @@
 <!doctype html>
-<html lang="en" xmlns:sec="http://www.thymeleaf.org.thymeleaf-extras-springsecurity5">
+<html lang="en"  xmlns:sec="http://www.thymeleaf.org.thymeleaf-extras-springsecurity5">
 <head>
     <!--<meta charset="utf-8">-->
 
     <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
 
     <title>Cooker</title>
-    <meta name="description" content="">
-    <meta name="author" content="">
 
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="stylesheet" href="css/style.css?v=2">
-
 
     <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
     <script src="js/libs/modernizr-1.7.min.js"></script>
@@ -38,7 +35,7 @@
         <hr class="separator">
         <button type="submit" class="button submit">Login</button>
     </form>
-    <div class="links"><a href="#">Forgotten password </a> | <a href="#" class="register-btn"> New account</a></div>
+    <div class="links"><a href="">Forgotten password </a> | <a href="#" class="register-btn"> New account</a></div>
     <a class="close" href="#"></a>
 </div>
 <div class="popup" id="popup-register">
@@ -65,6 +62,7 @@
     </form>
     <a class="close" href="#"></a>
 </div>
+
 <!-- END LOGIN POP UPS -->
 <div class='wrapper'>
     <header>
@@ -75,6 +73,7 @@
                     <li><a href="#" class="register-btn">register</a></li>
                     <li sec:authorize="isAuthenticated()"><a id="orders" href="/orders">orders</a></li>
                     <li sec:authorize="isAuthenticated()"><a id="check" href="/check-out">cart</a></li>
+                    <li sec:authorize="hasAuthority('ADMIN_ROLE')"><a href="/createDish" >create dish</a></li>
                 </ul>
             </nav>
             <div sec:authorize="isAuthenticated()">
@@ -113,42 +112,7 @@
         </ul>
     </header>
     <div class="content clearfix">
-        <div id="meals-of-the-day">
-            <h3 class="title-separator"><span class="title">Meals of the day</span><span class="sep"></span></h3>
-            <ul>
-                <li class="meal">
-                    <div class="img-holder"><img src="images/meal-1.png" alt=""></div>
-                    <div class="desc-holder">
-                        <h1><a href="#">Lorem ipsum dolar sit amet consectetur</a></h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac massa mauris.</p>
-                        <span class="price">$15.45</span>
-                        <button class="add-to-cart-button" onclick="add_to_cart()" type="button" name="add">add to
-                            cart
-                        </button>
-                    </div>
-                </li>
-                <li class="meal">
-                    <div class="img-holder"><img src="images/meal-2.png" alt=""></div>
-                    <div class="desc-holder">
-                        <h1><a href="#">Lorem ipsum dolar sit amet consectetur</a></h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac massa mauris.</p>
-                        <span class="price">$15.45</span>
-                        <a href="/check-out" class="add-to-cart-button">add to cart</a>
-                    </div>
-                </li>
-                <li class="meal">
-                    <div class="img-holder"><img src="images/meal-3.png" alt=""></div>
-                    <div class="desc-holder">
-                        <h1><a href="#">Lorem ipsum dolar sit amet consectetur</a></h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac massa mauris, vitae
-                            viverra mauris. Proin libero purus, feugiat rhoncus auctor ut, tempus dictum nunc.</p>
-                        <span class="price">$15.45</span>
-                        <a href="/check-out" class="add-to-cart-button">add to cart</a>
-                    </div>
-                </li>
 
-            </ul>
-        </div>
         <h3 class="title-separator"><span class="title">Featured meals</span><span class="sep"></span></h3>
 
         <div id="featured-meals">
@@ -175,20 +139,14 @@
                 <!--</li>-->
             </ul>
         </div>
-        <!--<h1>Spring Boot file upload example</h1>-->
 
-        <!--<form method="POST" action="/dishes/upload" enctype="multipart/form-data">-->
-        <!--<input type="file" name="file" /><br/><br/>-->
-        <!--<input type="submit" value="Submit" />-->
-        <!--</form>-->
 
-        <div class="cart-box">
+        <div sec:authorize="isAuthenticated()" class="cart-box">
             <div class="top">Cart</div>
             <div class="body">
                 <ul>
                     <li class="info">
                         <span class="products"><strong>5</strong> products</span>
-                        <a href="#">View cart</a>
                     </li>
                     <li class="price">
                         <span class="label">Shipping</span>
@@ -199,7 +157,7 @@
                         <span class="value">$0.00</span>
                     </li>
                 </ul>
-                <a class="submit-button" href="/check-out">Check out</a>
+                <a class="submit-button" id="check-out" href="/check-out">Check out</a>
                 <div class="graphic"></div>
             </div>
         </div>

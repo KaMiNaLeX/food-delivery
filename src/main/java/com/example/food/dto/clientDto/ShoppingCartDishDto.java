@@ -11,6 +11,24 @@ public class ShoppingCartDishDto implements Serializable {
     private String imgSource;
     private String category;
     private BigInteger cost;
+    private BigInteger menuId;
+    private BigInteger dishId;
+
+    public BigInteger getDishId() {
+        return dishId;
+    }
+
+    public void setDishId(BigInteger dishId) {
+        this.dishId = dishId;
+    }
+
+    public BigInteger getMenuId() {
+        return menuId;
+    }
+
+    public void setMenuId(BigInteger menuId) {
+        this.menuId = menuId;
+    }
 
     public String getDescription() {
         return description;
