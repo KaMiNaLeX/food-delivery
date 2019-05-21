@@ -571,3 +571,37 @@ function orderdishescb() {
         div.hidden = true;
     }
 }
+///////////
+/////CREATEDISHES.HTML
+function createdish() {
+    let dishDto = {};
+    let name = document.getElementById("name").value;
+    let mass = document.getElementById("mass").value;
+    let description = document.getElementById("description").value;
+    let menuId = document.getElementById("menuId").value;
+    let img = document.getElementsByName('file').files[0];
+
+    if (name == null || name == "" || mass == null || mass == "" || description == null || description == "" || menuId == null || menuId == "" || img == null || img =="") {
+        alert("Необходимо заполнить все поля!");
+        return false;
+    } else {
+        dishDto.name = name;
+        dishDto.mass = mass;
+        dishDto.description = description;
+        dishDto.menuId = menuId;
+        dishDto.multipartFile = img;
+        post("/admin/upload",img, dishDto, createCb);
+
+    }
+}
+function createCb() {
+    if (this.readyState == 4 && this.status == 200) {
+        let dishDto = JSON.parse(this.responseText);
+        if (dishDto.id != null) {
+            alert("Блюдо успешно добавлено");
+        } else {
+            alert("Что-то пошло не так!");
+        }
+    }
+    console.log("kjhgfd");
+}

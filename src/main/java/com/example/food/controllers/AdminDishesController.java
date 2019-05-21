@@ -34,6 +34,7 @@ public class AdminDishesController {
             Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
             Files.write(path, bytes);
 
+
         } catch (IOException e) {
             e.printStackTrace();
         }
