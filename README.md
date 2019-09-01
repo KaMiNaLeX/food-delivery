@@ -1,2 +1,2 @@
 # food-delivery
-Курсовой проект Java Sprung Boot
+Курсовой проект Java Spring Boot
