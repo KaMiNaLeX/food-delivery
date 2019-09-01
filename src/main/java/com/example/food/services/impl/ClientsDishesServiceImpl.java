@@ -21,5 +21,4 @@ public class ClientsDishesServiceImpl implements ClientsDishesService, ModelMapp
         map(clientsDishesRepository.findAll(), clientsDishesDtoList);
         return clientsDishesDtoList;
     }
-
 }

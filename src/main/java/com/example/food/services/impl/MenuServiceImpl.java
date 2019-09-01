@@ -58,6 +58,4 @@ public class MenuServiceImpl implements MenuService, ModelMapperService {
         }
         return resultList;
     }
-
-
 }

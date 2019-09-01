@@ -45,7 +45,6 @@ public class OrdersController {
         return ordersService.getAllOrdersParam(login);
     }
 
-
     @GetMapping("/{login}")
     public List getDishesByLogin(@PathVariable("login") String login, Principal principal) {
         if (!principal.getName().equals(login)) {
@@ -56,18 +55,16 @@ public class OrdersController {
     }
 
     @GetMapping("/orderId/{orderId}")
-    public List getDishesByOrderId(@PathVariable("orderId") Long orderId/*, Principal principal*/) {
-//        //current log-in clientId
-//        BigInteger id = clientsService.getByLogin(principal.getName()).getId();
-//        //clientId по запросу
-//        BigInteger clientid = ordersService.getOrderById(orderId).getClientId();
-//        if (!id.equals(clientid)) {
-//            return new ArrayList();
-//
-//        } else {
+    public List getDishesByOrderId(@PathVariable("orderId") Long orderId, Principal principal) {
+        //current log-in clientId
+        BigInteger id = clientsService.getByLogin(principal.getName()).getId();
+        //clientId по запросу
+        BigInteger clientid = ordersService.getOrderById(orderId).getClientId();
+        if (!id.equals(clientid)) {
+            return new ArrayList();
+
+        } else {
             return ordersService.getDishesByOrderId(orderId);
-//        }
-
-
+       }
     }
 }

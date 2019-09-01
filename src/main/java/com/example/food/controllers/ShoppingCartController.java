@@ -39,5 +39,4 @@ public class ShoppingCartController {
     public void delete(@PathVariable("id") Long id) {
          shoppingCartService.deleteShoppingCartDish(id);
     }
-
 }
